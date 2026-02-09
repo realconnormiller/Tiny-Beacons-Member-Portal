@@ -28,7 +28,7 @@ export default function Modal({
           <Button variant="primary" onClick={onPrimary}>
             {primaryLabel}
           </Button>
-          <Button variant="secondary" onClick={onSecondary}>
+          <Button variant="link" onClick={onSecondary}>
             {secondaryLabel}
           </Button>
         </div>

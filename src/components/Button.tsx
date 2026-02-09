@@ -2,7 +2,7 @@
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "link";
   onClick?: () => void;
 }
 
@@ -29,12 +29,20 @@ export default function Button({
           background: "var(--color-primary)",
           color: "#ffffff",
         }
-      : {
-          ...base,
-          background: "transparent",
-          color: "var(--color-text-muted)",
-          border: "1px solid var(--color-border)",
-        };
+      : variant === "link"
+        ? {
+            ...base,
+            background: "transparent",
+            color: "var(--color-text-muted)",
+            padding: "0",
+            textDecoration: "underline",
+          }
+        : {
+            ...base,
+            background: "transparent",
+            color: "var(--color-text-muted)",
+            border: "1px solid var(--color-border)",
+          };
 
   return (
     <button style={styles} onClick={onClick}>

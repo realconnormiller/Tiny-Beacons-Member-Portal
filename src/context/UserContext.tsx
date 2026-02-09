@@ -3,16 +3,16 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 export interface Child {
-  name: string;
-  ageGroup: string;
+  name?: string;
+  ageGroup: "3-4" | "5-7" | "Other";
 }
 
 export interface UserState {
   children: Child[];
-  preferredMoment: string;
-  emailReminders: boolean;
-  reminderFrequency: string;
-  onboardingComplete: boolean;
+  preferredMoment: "Bedtime" | "Morning" | "Car ride" | "Dinner" | "Weekend";
+  emailRemindersEnabled: boolean;
+  reminderFrequency: "couple_per_week" | "weekly" | "none";
+  onboardingCompleted: boolean;
 }
 
 interface UserContextValue {
@@ -21,11 +21,11 @@ interface UserContextValue {
 }
 
 const defaultUser: UserState = {
-  children: [{ name: "", ageGroup: "5–7" }],
+  children: [{ ageGroup: "5-7" }],
   preferredMoment: "Bedtime",
-  emailReminders: true,
-  reminderFrequency: "2x per week",
-  onboardingComplete: false,
+  emailRemindersEnabled: true,
+  reminderFrequency: "couple_per_week",
+  onboardingCompleted: false,
 };
 
 const UserContext = createContext<UserContextValue>({

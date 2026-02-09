@@ -10,23 +10,25 @@ export default function WelcomePage() {
   return (
     <div className="page">
       <Logo />
-      <h1>Welcome to Tiny Beacons. You&rsquo;re in the right place.</h1>
+      <h1>Welcome to Tiny Beacons. You&rsquo;re right where you belong.</h1>
       <h2>
-        Most parents want to lead spiritually at home &mdash; we&rsquo;ll keep
-        this simple.
+        Most parents want to lead spiritually at home.
+        <br />
+        You don&rsquo;t need a plan &mdash; just a moment. We&rsquo;ll keep
+        this gentle.
       </h2>
 
-      <ol className="checklist">
-        <li>Tell us your child&rsquo;s age</li>
-        <li>Pick your moment (bedtime, morning, car ride)</li>
-        <li>Do your first Tiny Moment tonight</li>
-      </ol>
+      <ul className="checklist">
+        <li>Learn about your child (only if you want)</li>
+        <li>Choose a moment that already fits your day</li>
+        <li>Share one small faith moment tonight</li>
+      </ul>
 
       <div className="button-row">
         <Button variant="primary" onClick={() => router.push("/setup")}>
-          Let&rsquo;s set this up
+          Let&rsquo;s begin
         </Button>
-        <Button variant="secondary" onClick={() => router.push("/start-here")}>
+        <Button variant="link" onClick={() => router.push("/start-here")}>
           Skip for now
         </Button>
       </div>

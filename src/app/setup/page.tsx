@@ -1,25 +1,47 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useUser, Child } from "@/context/UserContext";
+import { useUser, UserState } from "@/context/UserContext";
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 
-const MOMENTS = ["Bedtime", "Morning", "Car ride", "Dinner", "Weekend"];
-const FREQUENCIES = ["2x per week", "Weekly", "None"];
+type MomentValue = UserState["preferredMoment"];
+type FrequencyValue = UserState["reminderFrequency"];
+
+const MOMENTS: { value: MomentValue; label: string }[] = [
+  { value: "Bedtime", label: "Bedtime (recommended)" },
+  { value: "Morning", label: "Morning" },
+  { value: "Car ride", label: "Car ride" },
+  { value: "Dinner", label: "Dinner" },
+  { value: "Weekend", label: "Weekend" },
+];
+
+const FREQUENCIES: { value: FrequencyValue; label: string }[] = [
+  { value: "couple_per_week", label: "A couple times a week (recommended)" },
+  { value: "weekly", label: "Once a week" },
+  { value: "none", label: "No reminders" },
+];
 
 export default function SetupPage() {
   const router = useRouter();
   const { user, setUser } = useUser();
+  const [remindersExpanded, setRemindersExpanded] = useState(false);
 
-  function updateChild(index: number, field: keyof Child, value: string) {
+  function updateChildName(index: number, value: string) {
     const updated = [...user.children];
-    updated[index] = { ...updated[index], [field]: value };
+    updated[index] = { ...updated[index], name: value };
+    setUser({ children: updated });
+  }
+
+  function updateChildAge(index: number, value: string) {
+    const updated = [...user.children];
+    updated[index] = { ...updated[index], ageGroup: value as "3-4" | "5-7" | "Other" };
     setUser({ children: updated });
   }
 
   function addChild() {
-    setUser({ children: [...user.children, { name: "", ageGroup: "5–7" }] });
+    setUser({ children: [...user.children, { ageGroup: "5-7" }] });
   }
 
   function removeChild(index: number) {
@@ -31,26 +53,27 @@ export default function SetupPage() {
   return (
     <div className="page">
       <Logo />
+      <h1>Tell us a little about your family</h1>
+      <h2>You can change this anytime &mdash; or skip it completely.</h2>
 
-      {/* SECTION A — Child Info */}
+      {/* SECTION A — Children */}
       <div className="section">
-        <div className="section-title">Child Info (optional)</div>
         {user.children.map((child, i) => (
           <div key={i} className="card">
             <label>Child name</label>
             <input
               type="text"
               placeholder="Optional"
-              value={child.name}
-              onChange={(e) => updateChild(i, "name", e.target.value)}
+              value={child.name || ""}
+              onChange={(e) => updateChildName(i, e.target.value)}
             />
-            <label>Child age</label>
+            <label>Age range</label>
             <select
               value={child.ageGroup}
-              onChange={(e) => updateChild(i, "ageGroup", e.target.value)}
+              onChange={(e) => updateChildAge(i, e.target.value)}
             >
-              <option value="3–4">3–4</option>
-              <option value="5–7">5–7</option>
+              <option value="3-4">3-4</option>
+              <option value="5-7">5-7</option>
               <option value="Other">Other</option>
             </select>
             {user.children.length > 1 && (
@@ -62,6 +85,7 @@ export default function SetupPage() {
                   color: "var(--color-text-muted)",
                   cursor: "pointer",
                   fontSize: "0.8rem",
+                  fontFamily: "inherit",
                 }}
               >
                 Remove
@@ -78,60 +102,86 @@ export default function SetupPage() {
             cursor: "pointer",
             fontSize: "0.85rem",
             fontWeight: 500,
+            fontFamily: "inherit",
             padding: "4px 0",
           }}
         >
           + Add another child
         </button>
-        <p className="helper-text">Names are optional.</p>
+        <p className="helper-text">Names are optional. This is just for you.</p>
       </div>
 
       {/* SECTION B — Preferred moment */}
       <div className="section">
-        <div className="section-title">Preferred moment</div>
+        <div className="section-title">
+          When does a calm moment usually happen for you?
+        </div>
         <div className="radio-group">
           {MOMENTS.map((m) => (
             <button
-              key={m}
+              key={m.value}
               className={`radio-card${
-                user.preferredMoment === m ? " selected" : ""
+                user.preferredMoment === m.value ? " selected" : ""
               }`}
-              onClick={() => setUser({ preferredMoment: m })}
+              onClick={() => setUser({ preferredMoment: m.value })}
             >
-              {m}
+              {m.label}
             </button>
           ))}
         </div>
         <p className="helper-text">
-          Bedtime is the easiest place to build a rhythm.
+          Bedtime is often the easiest place to start &mdash; but any moment
+          works.
         </p>
       </div>
 
-      {/* SECTION C — Reminders */}
+      {/* SECTION C — Reminders (collapsed by default) */}
       <div className="section">
-        <div className="section-title">Reminders</div>
-        <div className="toggle-row">
-          <span style={{ fontSize: "0.9rem" }}>Email reminders</span>
-          <button
-            className={`toggle ${user.emailReminders ? "on" : "off"}`}
-            onClick={() => setUser({ emailReminders: !user.emailReminders })}
-            aria-label="Toggle email reminders"
-          />
+        <div className="section-title">
+          Would a gentle reminder be helpful?
         </div>
-        {user.emailReminders && (
-          <div className="radio-group">
-            {FREQUENCIES.map((f) => (
+        {!remindersExpanded ? (
+          <button
+            className="collapsible-trigger"
+            onClick={() => setRemindersExpanded(true)}
+          >
+            Set up reminders
+          </button>
+        ) : (
+          <>
+            <div className="toggle-row">
+              <span style={{ fontSize: "0.9rem" }}>Email reminders</span>
               <button
-                key={f}
-                className={`radio-card${
-                  user.reminderFrequency === f ? " selected" : ""
+                className={`toggle ${
+                  user.emailRemindersEnabled ? "on" : "off"
                 }`}
-                onClick={() => setUser({ reminderFrequency: f })}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
+                onClick={() =>
+                  setUser({
+                    emailRemindersEnabled: !user.emailRemindersEnabled,
+                  })
+                }
+                aria-label="Toggle email reminders"
+              />
+            </div>
+            {user.emailRemindersEnabled && (
+              <div className="radio-group">
+                {FREQUENCIES.map((f) => (
+                  <button
+                    key={f.value}
+                    className={`radio-card${
+                      user.reminderFrequency === f.value ? " selected" : ""
+                    }`}
+                    onClick={() => setUser({ reminderFrequency: f.value })}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            )}
+            <p className="helper-text">
+              No pressure. Just a nudge if you want one.
+            </p>
+          </>
         )}
       </div>
 
@@ -140,13 +190,13 @@ export default function SetupPage() {
           variant="primary"
           onClick={() => router.push("/start-here")}
         >
-          Save &amp; continue
+          That&rsquo;s enough &mdash; let&rsquo;s continue
         </Button>
         <Button
-          variant="secondary"
+          variant="link"
           onClick={() => router.push("/start-here")}
         >
-          Skip
+          Skip for now
         </Button>
       </div>
     </div>

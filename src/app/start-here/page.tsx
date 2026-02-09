@@ -14,26 +14,26 @@ export default function StartHerePage() {
   const [showModal, setShowModal] = useState(false);
 
   function handleComplete() {
-    setUser({ onboardingComplete: true });
+    setUser({ onboardingCompleted: true });
     setShowModal(true);
   }
 
   return (
     <div className="page">
       <Logo />
-      <h1>Your first Tiny Moment starts right here.</h1>
-      <h2>Watch the story. Ask one question. Done.</h2>
+      <h1>Your first Tiny Moment starts here.</h1>
+      <h2>Watch a short story. Ask one simple question. That&rsquo;s it.</h2>
 
       {/* CARD 1 — Watch */}
       <div className="card">
-        <h3>1) Watch tonight&rsquo;s story</h3>
+        <h3>Watch tonight&rsquo;s story</h3>
         <VideoPlaceholder />
-        <p style={{ marginTop: "8px" }}>Short. Calm. Kid-friendly.</p>
+        <p style={{ marginTop: "10px" }}>Short. Calm. Made for little hearts.</p>
       </div>
 
       {/* CARD 2 — Ask */}
       <div className="card">
-        <h3>2) Ask one question</h3>
+        <h3>Ask one question</h3>
         <p
           style={{
             fontStyle: "italic",
@@ -45,24 +45,30 @@ export default function StartHerePage() {
           &ldquo;Where did you see something good today?&rdquo;
         </p>
         <Button variant="primary" onClick={handleComplete}>
-          Mark question asked
+          We asked this
         </Button>
+        <p className="helper-text" style={{ marginTop: "10px" }}>
+          Any answer is perfect.
+        </p>
       </div>
 
-      {/* CARD 3 — Download */}
+      {/* CARD 3 — Optional */}
       <div className="card">
-        <h3>3) Grab the one-page guide (optional)</h3>
+        <h3>If you&rsquo;d like a little help</h3>
         <Button variant="secondary" onClick={handleComplete}>
-          Download guide
+          Download the one-page guide
         </Button>
+        <p className="helper-text" style={{ marginTop: "10px" }}>
+          Totally optional.
+        </p>
       </div>
 
       {showModal && (
         <Modal
-          title="That counts. Seriously."
-          body="You just created a faith moment at home. That's the whole point."
-          primaryLabel="Finish setup"
-          secondaryLabel="Go to my home page"
+          title="That counts. Truly."
+          body={"You just created a faith moment in your home.\nThat's the whole heart of Tiny Beacons."}
+          primaryLabel="That's enough for today"
+          secondaryLabel="Go to home"
           onPrimary={() => router.push("/done")}
           onSecondary={() => router.push("/home")}
         />
