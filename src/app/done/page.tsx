@@ -17,11 +17,11 @@ export default function DonePage() {
         You just need to show up sometimes &mdash; and you already did.
       </h2>
 
-      <ul className="bullet-list">
-        <li>One new story each month</li>
-        <li>Gentle prompts when you want them</li>
-        <li>Screen-free options for quieter days</li>
-      </ul>
+      <div className="belonging-section">
+        <p>One new story each month, whenever you&rsquo;re ready for it.</p>
+        <p>Gentle prompts when you want them &mdash; never when you don&rsquo;t.</p>
+        <p>Screen-free options for quieter days at home.</p>
+      </div>
 
       <div className="button-row">
         <Button variant="primary" onClick={() => router.push("/home")}>

@@ -12,7 +12,7 @@ export default function HomePage() {
       <Logo />
       <h1>Welcome back. You&rsquo;re doing a good job.</h1>
 
-      <div className="primary-card" style={{ marginTop: "32px" }}>
+      <div className="primary-card" style={{ marginTop: "36px" }}>
         <h3>Today&rsquo;s Tiny Moment</h3>
         <Button variant="primary" onClick={() => router.push("/start-here")}>
           Start here

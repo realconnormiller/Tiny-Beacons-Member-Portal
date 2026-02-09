@@ -36,7 +36,10 @@ export default function SetupPage() {
 
   function updateChildAge(index: number, value: string) {
     const updated = [...user.children];
-    updated[index] = { ...updated[index], ageGroup: value as "3-4" | "5-7" | "Other" };
+    updated[index] = {
+      ...updated[index],
+      ageGroup: value as "3-4" | "5-7" | "Other",
+    };
     setUser({ children: updated });
   }
 
@@ -56,11 +59,11 @@ export default function SetupPage() {
       <h1>Tell us a little about your family</h1>
       <h2>You can change this anytime &mdash; or skip it completely.</h2>
 
-      {/* SECTION A — Children */}
+      {/* Children */}
       <div className="section">
         {user.children.map((child, i) => (
-          <div key={i} className="card">
-            <label>Child name</label>
+          <div key={i} className="soft-container">
+            <label>Child name (only if you want)</label>
             <input
               type="text"
               placeholder="Optional"
@@ -111,7 +114,7 @@ export default function SetupPage() {
         <p className="helper-text">Names are optional. This is just for you.</p>
       </div>
 
-      {/* SECTION B — Preferred moment */}
+      {/* Preferred moment */}
       <div className="section">
         <div className="section-title">
           When does a calm moment usually happen for you?
@@ -135,7 +138,7 @@ export default function SetupPage() {
         </p>
       </div>
 
-      {/* SECTION C — Reminders (collapsed by default) */}
+      {/* Reminders (collapsed by default) */}
       <div className="section">
         <div className="section-title">
           Would a gentle reminder be helpful?
@@ -148,7 +151,7 @@ export default function SetupPage() {
             Set up reminders
           </button>
         ) : (
-          <>
+          <div className="soft-container">
             <div className="toggle-row">
               <span style={{ fontSize: "0.9rem" }}>Email reminders</span>
               <button
@@ -181,7 +184,7 @@ export default function SetupPage() {
             <p className="helper-text">
               No pressure. Just a nudge if you want one.
             </p>
-          </>
+          </div>
         )}
       </div>
 
@@ -192,10 +195,7 @@ export default function SetupPage() {
         >
           That&rsquo;s enough &mdash; let&rsquo;s continue
         </Button>
-        <Button
-          variant="link"
-          onClick={() => router.push("/start-here")}
-        >
+        <Button variant="link" onClick={() => router.push("/start-here")}>
           Skip for now
         </Button>
       </div>

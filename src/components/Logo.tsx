@@ -6,31 +6,31 @@ export default function Logo() {
       style={{
         display: "flex",
         alignItems: "center",
-        gap: "8px",
-        marginBottom: "32px",
+        gap: "10px",
+        marginBottom: "36px",
       }}
     >
       <div
         style={{
-          width: "32px",
-          height: "32px",
+          width: "28px",
+          height: "28px",
           borderRadius: "50%",
-          background: "var(--color-primary)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          background:
+            "radial-gradient(circle at 40% 40%, #e6a96f, #d4915a)",
+          boxShadow: "0 0 12px rgba(230, 169, 111, 0.25)",
+        }}
+      />
+      <span
+        style={{
+          fontFamily: '"Georgia", serif',
+          fontWeight: 400,
+          fontSize: "1.05rem",
+          color: "var(--color-text)",
+          letterSpacing: "-0.01em",
         }}
       >
-        <div
-          style={{
-            width: "8px",
-            height: "8px",
-            borderRadius: "50%",
-            background: "#f0c75e",
-          }}
-        />
-      </div>
-      <span style={{ fontWeight: 600, fontSize: "1.1rem" }}>Tiny Beacons</span>
+        Tiny Beacons
+      </span>
     </div>
   );
 }
