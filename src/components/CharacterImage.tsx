@@ -21,8 +21,8 @@ export default function CharacterImage({
   src,
   alt = "",
   position,
-  size = 110,
-  opacity = 0.18,
+  size = 120,
+  opacity = 0.28,
 }: CharacterImageProps) {
   return (
     <div
@@ -50,7 +50,7 @@ export default function CharacterImage({
           height: "100%",
           objectFit: "contain",
           opacity,
-          filter: "saturate(0.7) brightness(1.08)",
+          filter: "saturate(0.8) brightness(1.05)",
         }}
         draggable={false}
         unoptimized

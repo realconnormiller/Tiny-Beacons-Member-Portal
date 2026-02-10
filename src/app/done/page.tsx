@@ -16,7 +16,7 @@ export default function DonePage() {
       <Logo />
 
       <div className="hero" style={{ position: "relative" }}>
-        <CharacterImage src="/characters/grace.png" position="br" size={120} opacity={0.12} />
+        <CharacterImage src="/characters/grace.png" position="br" size={130} opacity={0.28} />
         <h1>You&rsquo;re a Tiny Beacons family.</h1>
         <h2>You don&rsquo;t need perfection. You need a rhythm.</h2>
       </div>

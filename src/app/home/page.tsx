@@ -94,7 +94,7 @@ function PublicHome() {
         </Button>
       </div>
 
-      <div className="content-card" style={{ marginTop: "48px" }}>
+      <div className="content-card" style={{ marginTop: "36px" }}>
         <h3>
           <span className="section-icon"><LanternIcon /></span>
           A moment when you&rsquo;re ready
@@ -150,7 +150,7 @@ function MemberHome() {
       <h1>Welcome back. Keep it simple.</h1>
 
       {/* Primary card — Anchor story */}
-      <div className="warm-card" style={{ marginTop: "36px" }}>
+      <div className="warm-card" style={{ marginTop: "24px" }}>
         <h3>A moment when you&rsquo;re ready</h3>
         <div className="card-subtitle">The Good Shepherd</div>
         <Button variant="primary" onClick={() => router.push("/start-here")}>
@@ -178,7 +178,7 @@ function MemberHome() {
 
       {/* Emotion → Verse widget */}
       <div className="emotion-widget" style={{ position: "relative" }}>
-        <CharacterImage src="/characters/copper.png" position="br" size={100} opacity={0.15} />
+        <CharacterImage src="/characters/copper.png" position="br" size={110} opacity={0.25} />
         <h4>
           <span className="section-icon"><StarIcon /></span>
           Need a steady word?

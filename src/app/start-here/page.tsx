@@ -47,7 +47,7 @@ export default function StartHerePage() {
 
       {/* Watch */}
       <div className="content-card" style={{ position: "relative" }}>
-        <CharacterImage src="/characters/luca.png" position="br" size={90} opacity={0.15} />
+        <CharacterImage src="/characters/luca.png" position="br" size={100} opacity={0.25} />
         <h3>
           <span className="section-icon"><PlayIcon /></span>
           Watch the story together

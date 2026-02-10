@@ -14,15 +14,15 @@ interface ModalProps {
 function BeaconIcon() {
   return (
     <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <circle cx="10" cy="10" r="4" fill="white" fillOpacity="0.9" />
-      <circle cx="10" cy="10" r="7" stroke="white" strokeOpacity="0.4" strokeWidth="1.5" fill="none" />
+      <circle cx="11" cy="11" r="4.5" fill="white" fillOpacity="0.92" />
+      <circle cx="11" cy="11" r="8" stroke="white" strokeOpacity="0.4" strokeWidth="1.5" fill="none" />
     </svg>
   );
 }

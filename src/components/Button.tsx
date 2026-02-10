@@ -31,7 +31,7 @@ export default function Button({
             "linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%)",
           color: "#ffffff",
           boxShadow:
-            "0 2px 8px rgba(91, 123, 106, 0.20), 0 1px 3px rgba(91, 123, 106, 0.12)",
+            "0 3px 10px rgba(61, 107, 82, 0.22), 0 1px 3px rgba(61, 107, 82, 0.14)",
           letterSpacing: "0.01em",
         }
       : variant === "link"
@@ -54,14 +54,25 @@ export default function Button({
             background: "var(--color-surface)",
             color: "var(--color-text-muted)",
             border: "1.5px solid var(--color-border)",
-            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.03)",
+            boxShadow:
+              "0 1px 4px rgba(30, 26, 23, 0.04), inset 0 1px 0 rgba(255,255,255,0.6)",
           };
 
   function pressIn(el: HTMLButtonElement) {
-    if (variant !== "link") el.style.transform = "scale(0.97)";
+    if (variant !== "link") {
+      el.style.transform = "scale(0.97)";
+      if (variant === "primary") {
+        el.style.boxShadow =
+          "0 1px 4px rgba(61, 107, 82, 0.18), 0 0 0 rgba(61, 107, 82, 0)";
+      }
+    }
   }
   function pressOut(el: HTMLButtonElement) {
     el.style.transform = "scale(1)";
+    if (variant === "primary") {
+      el.style.boxShadow =
+        "0 3px 10px rgba(61, 107, 82, 0.22), 0 1px 3px rgba(61, 107, 82, 0.14)";
+    }
   }
 
   return (
