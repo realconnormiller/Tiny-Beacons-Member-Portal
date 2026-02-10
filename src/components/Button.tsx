@@ -17,17 +17,22 @@ export default function Button({
     fontWeight: 500,
     cursor: "pointer",
     border: "none",
-    transition: "opacity 0.2s",
+    transition: "transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s",
+    WebkitTapHighlightColor: "transparent",
   };
 
   const styles: React.CSSProperties =
     variant === "primary"
       ? {
           ...base,
-          padding: "14px 32px",
+          padding: "15px 34px",
           borderRadius: "40px",
-          background: "var(--color-primary)",
+          background:
+            "linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%)",
           color: "#ffffff",
+          boxShadow:
+            "0 2px 8px rgba(91, 123, 106, 0.20), 0 1px 3px rgba(91, 123, 106, 0.12)",
+          letterSpacing: "0.01em",
         }
       : variant === "link"
         ? {
@@ -37,18 +42,35 @@ export default function Button({
             background: "transparent",
             color: "var(--color-text-muted)",
             fontWeight: 400,
+            fontSize: "0.88rem",
           }
         : {
             ...base,
-            padding: "12px 24px",
+            padding: "13px 26px",
             borderRadius: "40px",
-            background: "transparent",
+            background: "var(--color-surface)",
             color: "var(--color-text-muted)",
-            border: "1px solid var(--color-border)",
+            border: "1.5px solid var(--color-border)",
+            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.03)",
           };
 
   return (
-    <button style={styles} onClick={onClick}>
+    <button
+      style={styles}
+      onClick={onClick}
+      onMouseDown={(e) => {
+        if (variant !== "link") {
+          (e.currentTarget as HTMLButtonElement).style.transform =
+            "scale(0.97)";
+        }
+      }}
+      onMouseUp={(e) => {
+        (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
+      }}
+    >
       {children}
     </button>
   );

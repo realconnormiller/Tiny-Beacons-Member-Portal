@@ -7,19 +7,27 @@
 }
 
 :root {
+  /* --- Storybook Calm palette --- */
   --color-bg: #fdf8f4;
   --color-surface: #ffffff;
   --color-warm: #faf3ec;
-  --color-warm-deep: #f3e8da;
-  --color-text: #3a3330;
-  --color-text-muted: #8a7e76;
+  --color-warm-deep: #f0e4d4;
+  --color-text: #2e2926;
+  --color-text-muted: #7a6f66;
   --color-primary: #5b7b6a;
-  --color-primary-soft: #e8f0eb;
+  --color-primary-hover: #4d6b5b;
+  --color-primary-soft: #e3ede7;
   --color-accent: #e6a96f;
   --color-accent-soft: #fdf0e3;
-  --color-border: #ebe5df;
+  --color-peach: #f5c9a0;
+  --color-peach-soft: #fef5eb;
+  --color-sky: #c6dde8;
+  --color-sky-soft: #eef5f9;
+  --color-golden-glow: rgba(230, 169, 111, 0.12);
+  --color-border: #e8e1d9;
   --radius: 20px;
   --radius-sm: 14px;
+  --radius-lg: 28px;
   --max-width: 520px;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --serif: "Georgia", "Times New Roman", serif;
@@ -31,10 +39,14 @@ html {
 
 body {
   font-family: var(--serif);
-  background: var(--color-bg);
+  background:
+    radial-gradient(ellipse 600px 400px at 5% 95%, rgba(245, 201, 160, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 500px at 95% 5%, rgba(198, 221, 232, 0.08) 0%, transparent 70%),
+    var(--color-bg);
   color: var(--color-text);
   line-height: 1.75;
   min-height: 100vh;
+  position: relative;
 }
 
 a {
@@ -42,9 +54,39 @@ a {
   text-decoration: none;
 }
 
+/* ---- Ambient glow blob ---- */
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -80px;
+  right: -60px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-golden-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: gentleFloat 12s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(-20px, -30px) scale(1.08); opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
 /* ---- Page layout ---- */
 
 .page {
+  position: relative;
+  z-index: 1;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 72px 28px 80px;
@@ -52,38 +94,53 @@ a {
 
 .page h1 {
   font-family: var(--serif);
-  font-size: 1.55rem;
+  font-size: 1.75rem;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.35;
   margin-bottom: 14px;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
 }
 
 .page h2 {
   font-family: var(--sans);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 400;
   color: var(--color-text-muted);
   line-height: 1.75;
   margin-bottom: 44px;
 }
 
-/* ---- Hero (welcome / public home) ---- */
+/* ---- Hero ---- */
 
 .hero {
   position: relative;
-  padding: 48px 32px 44px;
-  margin: -20px -28px 40px;
-  border-radius: 0 0 40px 40px;
+  padding: 52px 32px 48px;
+  margin: -20px -28px 44px;
+  border-radius: 0 0 44px 44px;
   background:
-    radial-gradient(ellipse 300px 200px at 10% 90%, var(--color-accent-soft) 0%, transparent 70%),
-    radial-gradient(ellipse 250px 250px at 90% 20%, var(--color-primary-soft) 0%, transparent 70%),
+    radial-gradient(ellipse 320px 220px at 8% 85%, rgba(245, 201, 160, 0.30) 0%, transparent 70%),
+    radial-gradient(ellipse 260px 260px at 92% 15%, rgba(198, 221, 232, 0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 200px 200px at 50% 100%, var(--color-golden-glow) 0%, transparent 70%),
     var(--color-warm);
   overflow: hidden;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -30px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50% 50% 50% 30%;
+  background: radial-gradient(circle, rgba(245, 201, 160, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
 .hero h1 {
   position: relative;
+  font-size: 1.85rem;
 }
 
 .hero h2 {
@@ -91,7 +148,54 @@ a {
   margin-bottom: 0;
 }
 
-/* ---- Reassurance card (non-interactive, no cursor change) ---- */
+/* ---- Page accent blob (per-page asymmetric shape) ---- */
+
+.page-blob {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.page-blob--top-right {
+  top: 40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(198, 221, 232, 0.15) 0%, transparent 70%);
+}
+
+.page-blob--bottom-left {
+  bottom: 60px;
+  left: -50px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(245, 201, 160, 0.12) 0%, transparent 70%);
+  border-radius: 50% 30% 50% 40%;
+}
+
+/* ---- Inline icon (non-interactive decorative) ---- */
+
+.section-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-peach-soft);
+  margin-right: 10px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.section-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-accent);
+}
+
+/* ---- Reassurance card (non-interactive) ---- */
 
 .reassurance-card {
   display: flex;
@@ -102,10 +206,12 @@ a {
 
 .reassurance-icon {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: var(--color-warm);
+  background:
+    radial-gradient(circle at 40% 40%, var(--color-peach-soft) 0%, var(--color-warm) 100%);
+  box-shadow: 0 0 12px rgba(245, 201, 160, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,7 +223,7 @@ a {
   font-size: 0.9rem;
   color: var(--color-text-muted);
   line-height: 1.6;
-  padding-top: 6px;
+  padding-top: 8px;
 }
 
 /* ---- Content card (white surface, non-interactive by default) ---- */
@@ -128,12 +234,14 @@ a {
   border-radius: var(--radius);
   padding: 32px 28px;
   margin-bottom: 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 16px rgba(0, 0, 0, 0.02);
 }
 
 .content-card h3 {
   font-family: var(--serif);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 400;
   margin-bottom: 12px;
 }
@@ -145,32 +253,53 @@ a {
   line-height: 1.7;
 }
 
-/* ---- Warm card (warm bg, non-interactive by default) ---- */
+/* ---- Warm card (anchor story) ---- */
 
 .warm-card {
-  background: var(--color-warm);
+  position: relative;
+  background:
+    radial-gradient(ellipse 200px 150px at 80% 20%, rgba(198, 221, 232, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 180px 180px at 20% 80%, rgba(245, 201, 160, 0.10) 0%, transparent 70%),
+    var(--color-warm);
   border: none;
-  border-radius: var(--radius);
-  padding: 40px 32px;
-  margin-bottom: 12px;
+  border-radius: var(--radius-lg);
+  padding: 44px 32px;
+  margin-bottom: 16px;
   text-align: center;
+  overflow: hidden;
+}
+
+.warm-card::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-golden-glow) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .warm-card h3 {
+  position: relative;
   font-family: var(--serif);
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 400;
   margin-bottom: 6px;
 }
 
 .warm-card .card-subtitle {
+  position: relative;
   font-family: var(--sans);
   font-size: 0.85rem;
   color: var(--color-text-muted);
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .warm-card p {
+  position: relative;
   font-family: var(--sans);
   color: var(--color-text-muted);
   font-size: 0.84rem;
@@ -178,7 +307,7 @@ a {
   line-height: 1.5;
 }
 
-/* ---- Quiet card (companion / secondary, non-interactive) ---- */
+/* ---- Quiet card (companion) ---- */
 
 .quiet-card {
   background: var(--color-surface);
@@ -191,16 +320,16 @@ a {
 
 .quiet-card h4 {
   font-family: var(--serif);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 400;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .quiet-card p {
   font-family: var(--sans);
   color: var(--color-text-muted);
-  font-size: 0.82rem;
-  line-height: 1.55;
+  font-size: 0.84rem;
+  line-height: 1.6;
 }
 
 /* ---- Buttons ---- */
@@ -224,7 +353,9 @@ a {
 /* ---- Soft container (form groups) ---- */
 
 .soft-container {
-  background: var(--color-warm);
+  background:
+    radial-gradient(ellipse 200px 120px at 90% 10%, rgba(245, 201, 160, 0.06) 0%, transparent 70%),
+    var(--color-warm);
   border-radius: var(--radius);
   padding: 24px;
   margin-bottom: 24px;
@@ -276,18 +407,37 @@ select {
   background: var(--color-surface);
   margin-bottom: 14px;
   color: var(--color-text);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input[type="text"]:focus,
 input[type="number"]:focus,
 select:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: -1px;
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
 }
 
 input[type="text"]::placeholder,
 input[type="number"]::placeholder {
-  color: var(--color-border);
+  color: #c8bfb5;
+}
+
+/* Custom age reveal animation */
+.custom-age-reveal {
+  overflow: hidden;
+  animation: revealHeight 0.3s ease-out;
+}
+
+@keyframes revealHeight {
+  from { max-height: 0; opacity: 0; }
+  to { max-height: 120px; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-age-reveal {
+    animation: none;
+  }
 }
 
 .radio-group {
@@ -298,12 +448,12 @@ input[type="number"]::placeholder {
 
 .radio-card {
   padding: 12px 18px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 0.88rem;
   font-family: var(--sans);
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   background: var(--color-surface);
   color: var(--color-text-muted);
 }
@@ -312,6 +462,7 @@ input[type="number"]::placeholder {
   border-color: var(--color-primary);
   background: var(--color-primary-soft);
   color: var(--color-text);
+  box-shadow: 0 0 0 2px var(--color-primary-soft);
 }
 
 .toggle-row {
@@ -349,6 +500,7 @@ input[type="number"]::placeholder {
   border-radius: 50%;
   background: white;
   transition: left 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
 .toggle.on::after {
@@ -359,7 +511,7 @@ input[type="number"]::placeholder {
   left: 2px;
 }
 
-/* ---- Belonging paragraphs (non-interactive text) ---- */
+/* ---- Belonging paragraphs ---- */
 
 .belonging-section {
   margin-bottom: 44px;
@@ -407,15 +559,19 @@ input[type="number"]::placeholder {
 /* ---- Emotion widget ---- */
 
 .emotion-widget {
-  background: var(--color-warm);
-  border-radius: var(--radius);
-  padding: 28px 24px;
+  position: relative;
+  background:
+    radial-gradient(ellipse 160px 120px at 85% 20%, rgba(198, 221, 232, 0.15) 0%, transparent 70%),
+    var(--color-warm);
+  border-radius: var(--radius-lg);
+  padding: 32px 26px;
   margin-bottom: 32px;
+  overflow: hidden;
 }
 
 .emotion-widget h4 {
   font-family: var(--serif);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 400;
   margin-bottom: 4px;
 }
@@ -424,7 +580,7 @@ input[type="number"]::placeholder {
   font-family: var(--sans);
   font-size: 0.82rem;
   color: var(--color-text-muted);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   line-height: 1.55;
 }
 
@@ -435,31 +591,49 @@ input[type="number"]::placeholder {
   margin-bottom: 16px;
 }
 
+/* Emotion pill candy colors */
 .emotion-pill {
-  padding: 8px 16px;
-  border: 1px solid var(--color-border);
+  padding: 9px 18px;
+  border: 1.5px solid transparent;
   border-radius: 40px;
   cursor: pointer;
   font-size: 0.82rem;
   font-family: var(--sans);
-  transition: border-color 0.2s, background 0.2s;
-  background: var(--color-surface);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.12s;
   color: var(--color-text-muted);
 }
 
+.emotion-pill:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .emotion-pill:active {
+    transform: none;
+  }
+}
+
+.emotion-pill:nth-child(1) { background: #fef5eb; border-color: #f5dfc8; }
+.emotion-pill:nth-child(2) { background: #eef5f9; border-color: #d0e4ee; }
+.emotion-pill:nth-child(3) { background: #f2f7f0; border-color: #d4e5d0; }
+.emotion-pill:nth-child(4) { background: #fdf0f5; border-color: #ecd4df; }
+.emotion-pill:nth-child(5) { background: #f8f3fe; border-color: #e0d3f0; }
+.emotion-pill:nth-child(6) { background: #fef9ec; border-color: #ede0b8; }
+
 .emotion-pill.selected {
-  border-color: var(--color-primary);
-  background: var(--color-primary-soft);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(230, 169, 111, 0.18);
   color: var(--color-text);
+  font-weight: 500;
 }
 
 .verse-display {
   font-family: var(--serif);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-style: italic;
   color: var(--color-text);
   line-height: 1.65;
-  padding: 16px 0 0;
+  padding: 18px 0 0;
 }
 
 .verse-reference {
@@ -470,7 +644,7 @@ input[type="number"]::placeholder {
   font-style: normal;
 }
 
-/* ---- Footer note (non-interactive) ---- */
+/* ---- Footer note ---- */
 
 .footer-note {
   text-align: center;
@@ -486,27 +660,66 @@ input[type="number"]::placeholder {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(50, 42, 36, 0.35);
+  background: rgba(58, 48, 40, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
   padding: 24px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay {
+    animation: none;
+  }
 }
 
 .modal {
   background: var(--color-surface);
   border-radius: 24px;
-  padding: 40px 36px;
+  padding: 44px 36px 40px;
   max-width: 400px;
   width: 100%;
+  box-shadow:
+    0 8px 40px rgba(58, 48, 40, 0.10),
+    0 2px 8px rgba(58, 48, 40, 0.06);
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal {
+    animation: none;
+  }
+}
+
+.modal-beacon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, var(--color-peach) 0%, var(--color-accent) 100%);
+  box-shadow: 0 0 20px rgba(230, 169, 111, 0.20);
+  margin-bottom: 20px;
 }
 
 .modal h3 {
   font-family: var(--serif);
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 400;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .modal p {
@@ -522,7 +735,7 @@ input[type="number"]::placeholder {
   margin-bottom: 32px;
 }
 
-/* ---- Collapsible trigger (this IS interactive) ---- */
+/* ---- Collapsible trigger ---- */
 
 .collapsible-trigger {
   background: none;
@@ -533,32 +746,52 @@ input[type="number"]::placeholder {
   font-weight: 500;
   color: var(--color-primary);
   padding: 8px 0;
+  transition: color 0.2s;
 }
 
 /* ---- Pricing page ---- */
 
 .pricing-card {
+  position: relative;
   background: var(--color-surface);
-  border-radius: var(--radius);
-  padding: 40px 32px;
+  border-radius: var(--radius-lg);
+  padding: 44px 32px;
   margin-bottom: 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.04),
+    0 6px 24px rgba(0, 0, 0, 0.03);
   text-align: center;
+  overflow: hidden;
+}
+
+.pricing-card::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-golden-glow) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .pricing-card .price {
+  position: relative;
   font-family: var(--serif);
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 400;
   color: var(--color-text);
-  margin: 24px 0 6px;
+  margin: 28px 0 8px;
 }
 
 .pricing-card .price-note {
+  position: relative;
   font-family: var(--sans);
   font-size: 0.82rem;
   color: var(--color-text-muted);
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .value-anchor {
@@ -568,5 +801,5 @@ input[type="number"]::placeholder {
   line-height: 1.7;
   font-style: italic;
   text-align: center;
-  margin-top: 32px;
+  margin-top: 36px;
 }

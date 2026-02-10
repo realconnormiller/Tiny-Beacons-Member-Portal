@@ -61,6 +61,8 @@ export default function SetupPage() {
 
   return (
     <div className="page">
+      <div className="page-blob page-blob--top-right" />
+
       <Logo />
       <h1>Tell us a little about your family</h1>
       <h2>You can change this anytime &mdash; or skip it completely.</h2>
@@ -86,7 +88,7 @@ export default function SetupPage() {
               <option value="Other">Other</option>
             </select>
             {child.ageGroup === "Other" && (
-              <>
+              <div className="custom-age-reveal">
                 <label>Age (only if you want)</label>
                 <input
                   type="number"
@@ -96,7 +98,7 @@ export default function SetupPage() {
                   value={child.customAge ?? ""}
                   onChange={(e) => updateChildCustomAge(i, e.target.value)}
                 />
-              </>
+              </div>
             )}
             {user.children.length > 1 && (
               <button

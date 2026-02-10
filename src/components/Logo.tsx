@@ -12,19 +12,20 @@ export default function Logo() {
     >
       <div
         style={{
-          width: "28px",
-          height: "28px",
+          width: "30px",
+          height: "30px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle at 40% 40%, #e6a96f, #d4915a)",
-          boxShadow: "0 0 12px rgba(230, 169, 111, 0.25)",
+            "radial-gradient(circle at 35% 35%, #f5c9a0, #e6a96f, #d4915a)",
+          boxShadow:
+            "0 0 16px rgba(230, 169, 111, 0.30), 0 0 4px rgba(230, 169, 111, 0.15)",
         }}
       />
       <span
         style={{
           fontFamily: '"Georgia", serif',
           fontWeight: 400,
-          fontSize: "1.05rem",
+          fontSize: "1.08rem",
           color: "var(--color-text)",
           letterSpacing: "-0.01em",
         }}

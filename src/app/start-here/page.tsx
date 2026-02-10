@@ -8,6 +8,23 @@ import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
 
+function PlayIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M6.5 5l4 3-4 3V5z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function ChatIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M2 3h12v8H6l-3 2v-2H2V3z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 export default function StartHerePage() {
   const router = useRouter();
   const { setUser } = useUser();
@@ -20,13 +37,19 @@ export default function StartHerePage() {
 
   return (
     <div className="page">
+      <div className="page-blob page-blob--top-right" />
+      <div className="page-blob page-blob--bottom-left" />
+
       <Logo />
       <h1>Your first Tiny Moment starts right here.</h1>
       <h2>Watch a story. Ask one question. That&rsquo;s enough.</h2>
 
       {/* Watch */}
       <div className="content-card">
-        <h3>Watch the story together</h3>
+        <h3>
+          <span className="section-icon"><PlayIcon /></span>
+          Watch the story together
+        </h3>
         <VideoPlaceholder />
         <p style={{ marginTop: "12px" }}>Short. Calm. Kid-friendly.</p>
         <div style={{ marginTop: "16px" }}>
@@ -38,7 +61,10 @@ export default function StartHerePage() {
 
       {/* Ask */}
       <div className="content-card">
-        <h3>Ask one question</h3>
+        <h3>
+          <span className="section-icon"><ChatIcon /></span>
+          Ask one question
+        </h3>
         <p
           style={{
             fontStyle: "italic",

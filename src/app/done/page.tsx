@@ -9,9 +9,15 @@ export default function DonePage() {
 
   return (
     <div className="page">
+      <div className="page-blob page-blob--top-right" />
+      <div className="page-blob page-blob--bottom-left" />
+
       <Logo />
-      <h1>You&rsquo;re a Tiny Beacons family.</h1>
-      <h2>You don&rsquo;t need perfection. You need a rhythm.</h2>
+
+      <div className="hero">
+        <h1>You&rsquo;re a Tiny Beacons family.</h1>
+        <h2>You don&rsquo;t need perfection. You need a rhythm.</h2>
+      </div>
 
       <div className="button-row">
         <Button variant="primary" onClick={() => router.push("/home")}>

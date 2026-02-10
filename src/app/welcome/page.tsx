@@ -16,6 +16,9 @@ export default function WelcomePage() {
 
   return (
     <div className="page">
+      <div className="page-blob page-blob--top-right" />
+      <div className="page-blob page-blob--bottom-left" />
+
       <Logo />
 
       <div className="hero">

@@ -34,12 +34,41 @@ const EMOTION_VERSES: Record<string, { verse: string; reference: string }> = {
   },
 };
 
+/* Small inline SVG icons (decorative only, non-interactive) */
+function LanternIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M8 1v2M8 13v2M3.5 5.5a4.5 4.5 0 019 0c0 2.5-2 4-2 6H5.5c0-2-2-3.5-2-6z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M5.5 11.5h5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function HeartIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M8 14s-5.5-3.5-5.5-7A3 3 0 018 4.5 3 3 0 0113.5 7C13.5 10.5 8 14 8 14z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M8 1l2 4.5 5 .5-3.5 3.5 1 5L8 12l-4.5 2.5 1-5L1 6l5-.5L8 1z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 function PublicHome() {
   const router = useRouter();
   const [showPaywall, setShowPaywall] = useState(false);
 
   return (
     <div className="page">
+      <div className="page-blob page-blob--top-right" />
+      <div className="page-blob page-blob--bottom-left" />
+
       <Logo />
 
       <div className="hero">
@@ -65,7 +94,10 @@ function PublicHome() {
       </div>
 
       <div className="content-card" style={{ marginTop: "48px" }}>
-        <h3>A moment when you&rsquo;re ready</h3>
+        <h3>
+          <span className="section-icon"><LanternIcon /></span>
+          A moment when you&rsquo;re ready
+        </h3>
         <p style={{ marginBottom: "12px" }}>
           This space holds gentle stories, simple prompts, and quiet prayer
           cards &mdash; always here, never rushed.
@@ -110,6 +142,9 @@ function MemberHome() {
 
   return (
     <div className="page">
+      <div className="page-blob page-blob--top-right" />
+      <div className="page-blob page-blob--bottom-left" />
+
       <Logo />
       <h1>Welcome back. Keep it simple.</h1>
 
@@ -131,7 +166,10 @@ function MemberHome() {
 
       {/* Prayer Cards section */}
       <div className="content-card">
-        <h3>Prayer Cards</h3>
+        <h3>
+          <span className="section-icon"><HeartIcon /></span>
+          Prayer Cards
+        </h3>
         <p>
           Short prayers and scriptures for moments when words feel hard.
         </p>
@@ -139,7 +177,10 @@ function MemberHome() {
 
       {/* Emotion → Verse widget */}
       <div className="emotion-widget">
-        <h4>Need a steady word?</h4>
+        <h4>
+          <span className="section-icon"><StarIcon /></span>
+          Need a steady word?
+        </h4>
         <div className="emotion-subtext">
           Pick what you&rsquo;re feeling. We&rsquo;ll keep it simple.
         </div>

@@ -9,6 +9,9 @@ export default function PricingPage() {
 
   return (
     <div className="page">
+      <div className="page-blob page-blob--top-right" />
+      <div className="page-blob page-blob--bottom-left" />
+
       <Logo />
       <h1>A calm space for your family.</h1>
       <h2>
