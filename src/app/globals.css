@@ -42,7 +42,7 @@ a {
   text-decoration: none;
 }
 
-/* ---- Page ---- */
+/* ---- Page layout ---- */
 
 .page {
   max-width: var(--max-width);
@@ -68,7 +68,7 @@ a {
   margin-bottom: 44px;
 }
 
-/* ---- Hero (welcome) ---- */
+/* ---- Hero (welcome / public home) ---- */
 
 .hero {
   position: relative;
@@ -91,7 +91,7 @@ a {
   margin-bottom: 0;
 }
 
-/* ---- Reassurance card (non-interactive) ---- */
+/* ---- Reassurance card (non-interactive, no cursor change) ---- */
 
 .reassurance-card {
   display: flex;
@@ -120,9 +120,9 @@ a {
   padding-top: 6px;
 }
 
-/* ---- Invitation card ---- */
+/* ---- Content card (white surface, non-interactive by default) ---- */
 
-.invitation-card {
+.content-card {
   background: var(--color-surface);
   border: none;
   border-radius: var(--radius);
@@ -131,18 +131,76 @@ a {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
-.invitation-card h3 {
+.content-card h3 {
   font-family: var(--serif);
   font-size: 1.05rem;
   font-weight: 400;
   margin-bottom: 12px;
 }
 
-.invitation-card p {
+.content-card p {
   font-family: var(--sans);
   color: var(--color-text-muted);
   font-size: 0.88rem;
   line-height: 1.7;
+}
+
+/* ---- Warm card (warm bg, non-interactive by default) ---- */
+
+.warm-card {
+  background: var(--color-warm);
+  border: none;
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.warm-card h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.warm-card .card-subtitle {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.warm-card p {
+  font-family: var(--sans);
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+/* ---- Quiet card (companion / secondary, non-interactive) ---- */
+
+.quiet-card {
+  background: var(--color-surface);
+  border: none;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.quiet-card h4 {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.quiet-card p {
+  font-family: var(--sans);
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 
 /* ---- Buttons ---- */
@@ -151,6 +209,14 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.button-row-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 16px;
   margin-top: 40px;
 }
@@ -199,6 +265,7 @@ label {
 }
 
 input[type="text"],
+input[type="number"],
 select {
   width: 100%;
   padding: 13px 16px;
@@ -212,12 +279,14 @@ select {
 }
 
 input[type="text"]:focus,
+input[type="number"]:focus,
 select:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: -1px;
 }
 
-input[type="text"]::placeholder {
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
   color: var(--color-border);
 }
 
@@ -290,7 +359,7 @@ input[type="text"]::placeholder {
   left: 2px;
 }
 
-/* ---- Belonging paragraphs ---- */
+/* ---- Belonging paragraphs (non-interactive text) ---- */
 
 .belonging-section {
   margin-bottom: 44px;
@@ -308,72 +377,7 @@ input[type="text"]::placeholder {
   margin-bottom: 0;
 }
 
-/* ---- Anchor card (home — primary story) ---- */
-
-.anchor-card {
-  background: var(--color-warm);
-  border: none;
-  border-radius: var(--radius);
-  padding: 40px 32px;
-  margin-bottom: 12px;
-  text-align: center;
-}
-
-.anchor-card h3 {
-  font-family: var(--serif);
-  font-size: 1.15rem;
-  font-weight: 400;
-  margin-bottom: 6px;
-}
-
-.anchor-card .anchor-story-name {
-  font-family: var(--sans);
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  margin-bottom: 20px;
-}
-
-.anchor-card p {
-  font-family: var(--sans);
-  color: var(--color-text-muted);
-  font-size: 0.84rem;
-  margin-top: 16px;
-  line-height: 1.5;
-}
-
-/* ---- Companion card (home — secondary story, quieter) ---- */
-
-.companion-card {
-  background: var(--color-surface);
-  border: none;
-  border-radius: var(--radius);
-  padding: 24px 28px;
-  margin-bottom: 32px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-}
-
-.companion-card h4 {
-  font-family: var(--serif);
-  font-size: 0.95rem;
-  font-weight: 400;
-  margin-bottom: 4px;
-}
-
-.companion-card .companion-story-name {
-  font-family: var(--sans);
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-  margin-bottom: 12px;
-}
-
-.companion-card p {
-  font-family: var(--sans);
-  color: var(--color-text-muted);
-  font-size: 0.82rem;
-  line-height: 1.55;
-}
-
-/* ---- Secondary links ---- */
+/* ---- Secondary links (text-only, visually quiet) ---- */
 
 .secondary-links {
   display: flex;
@@ -400,7 +404,73 @@ input[type="text"]::placeholder {
   border-top: 1px solid var(--color-border);
 }
 
-/* ---- Footer ---- */
+/* ---- Emotion widget ---- */
+
+.emotion-widget {
+  background: var(--color-warm);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  margin-bottom: 32px;
+}
+
+.emotion-widget h4 {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.emotion-widget .emotion-subtext {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+
+.emotion-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.emotion-pill {
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-family: var(--sans);
+  transition: border-color 0.2s, background 0.2s;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+}
+
+.emotion-pill.selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-text);
+}
+
+.verse-display {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.65;
+  padding: 16px 0 0;
+}
+
+.verse-reference {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: 8px;
+  font-style: normal;
+}
+
+/* ---- Footer note (non-interactive) ---- */
 
 .footer-note {
   text-align: center;
@@ -442,13 +512,17 @@ input[type="text"]::placeholder {
 .modal p {
   font-family: var(--sans);
   color: var(--color-text-muted);
-  margin-bottom: 32px;
+  margin-bottom: 12px;
   line-height: 1.7;
   white-space: pre-line;
   font-size: 0.92rem;
 }
 
-/* ---- Collapsible trigger ---- */
+.modal p:last-of-type {
+  margin-bottom: 32px;
+}
+
+/* ---- Collapsible trigger (this IS interactive) ---- */
 
 .collapsible-trigger {
   background: none;
@@ -459,4 +533,40 @@ input[type="text"]::placeholder {
   font-weight: 500;
   color: var(--color-primary);
   padding: 8px 0;
+}
+
+/* ---- Pricing page ---- */
+
+.pricing-card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.pricing-card .price {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin: 24px 0 6px;
+}
+
+.pricing-card .price-note {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+}
+
+.value-anchor {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  font-style: italic;
+  text-align: center;
+  margin-top: 32px;
 }

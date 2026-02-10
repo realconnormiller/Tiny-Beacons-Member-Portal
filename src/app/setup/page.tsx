@@ -7,20 +7,13 @@ import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 
 type MomentValue = UserState["preferredMoment"];
-type FrequencyValue = UserState["reminderFrequency"];
 
 const MOMENTS: { value: MomentValue; label: string }[] = [
-  { value: "Bedtime", label: "Bedtime (recommended)" },
+  { value: "Bedtime", label: "Bedtime" },
   { value: "Morning", label: "Morning" },
   { value: "Car ride", label: "Car ride" },
   { value: "Dinner", label: "Dinner" },
   { value: "Weekend", label: "Weekend" },
-];
-
-const FREQUENCIES: { value: FrequencyValue; label: string }[] = [
-  { value: "couple_per_week", label: "A couple times a week (recommended)" },
-  { value: "weekly", label: "Once a week" },
-  { value: "none", label: "No reminders" },
 ];
 
 export default function SetupPage() {
@@ -39,6 +32,19 @@ export default function SetupPage() {
     updated[index] = {
       ...updated[index],
       ageGroup: value as "3-4" | "5-7" | "Other",
+    };
+    if (value !== "Other") {
+      updated[index] = { ...updated[index], customAge: undefined };
+    }
+    setUser({ children: updated });
+  }
+
+  function updateChildCustomAge(index: number, value: string) {
+    const updated = [...user.children];
+    const num = parseInt(value, 10);
+    updated[index] = {
+      ...updated[index],
+      customAge: isNaN(num) ? undefined : Math.min(18, Math.max(0, num)),
     };
     setUser({ children: updated });
   }
@@ -63,7 +69,7 @@ export default function SetupPage() {
       <div className="section">
         {user.children.map((child, i) => (
           <div key={i} className="soft-container">
-            <label>Child name (only if you want)</label>
+            <label>Child name (optional)</label>
             <input
               type="text"
               placeholder="Optional"
@@ -79,6 +85,19 @@ export default function SetupPage() {
               <option value="5-7">5-7</option>
               <option value="Other">Other</option>
             </select>
+            {child.ageGroup === "Other" && (
+              <>
+                <label>Age (only if you want)</label>
+                <input
+                  type="number"
+                  placeholder="e.g., 2, 8, 10"
+                  min={0}
+                  max={18}
+                  value={child.customAge ?? ""}
+                  onChange={(e) => updateChildCustomAge(i, e.target.value)}
+                />
+              </>
+            )}
             {user.children.length > 1 && (
               <button
                 onClick={() => removeChild(i)}
@@ -111,7 +130,7 @@ export default function SetupPage() {
         >
           + Add another child
         </button>
-        <p className="helper-text">Names are optional. This is just for you.</p>
+        <p className="helper-text">Names are optional.</p>
       </div>
 
       {/* Preferred moment */}
@@ -133,8 +152,7 @@ export default function SetupPage() {
           ))}
         </div>
         <p className="helper-text">
-          Bedtime is often the easiest place to start &mdash; but any moment
-          works.
+          Bedtime is the easiest place to build a rhythm.
         </p>
       </div>
 
@@ -166,24 +184,6 @@ export default function SetupPage() {
                 aria-label="Toggle email reminders"
               />
             </div>
-            {user.emailRemindersEnabled && (
-              <div className="radio-group">
-                {FREQUENCIES.map((f) => (
-                  <button
-                    key={f.value}
-                    className={`radio-card${
-                      user.reminderFrequency === f.value ? " selected" : ""
-                    }`}
-                    onClick={() => setUser({ reminderFrequency: f.value })}
-                  >
-                    {f.label}
-                  </button>
-                ))}
-              </div>
-            )}
-            <p className="helper-text">
-              No pressure. Just a nudge if you want one.
-            </p>
           </div>
         )}
       </div>
@@ -193,7 +193,7 @@ export default function SetupPage() {
           variant="primary"
           onClick={() => router.push("/start-here")}
         >
-          That&rsquo;s enough &mdash; let&rsquo;s continue
+          Continue
         </Button>
         <Button variant="link" onClick={() => router.push("/start-here")}>
           Skip for now

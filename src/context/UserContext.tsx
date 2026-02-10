@@ -5,9 +5,11 @@ import { createContext, useContext, useState, ReactNode } from "react";
 export interface Child {
   name?: string;
   ageGroup: "3-4" | "5-7" | "Other";
+  customAge?: number;
 }
 
 export interface UserState {
+  isLoggedIn: boolean;
   children: Child[];
   preferredMoment: "Bedtime" | "Morning" | "Car ride" | "Dinner" | "Weekend";
   emailRemindersEnabled: boolean;
@@ -21,6 +23,7 @@ interface UserContextValue {
 }
 
 const defaultUser: UserState = {
+  isLoggedIn: false,
   children: [{ ageGroup: "5-7" }],
   preferredMoment: "Bedtime",
   emailRemindersEnabled: true,

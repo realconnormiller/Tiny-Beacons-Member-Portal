@@ -4,7 +4,7 @@ import Button from "./Button";
 
 interface ModalProps {
   title: string;
-  body: string;
+  body: React.ReactNode;
   primaryLabel: string;
   secondaryLabel: string;
   onPrimary: () => void;
@@ -23,7 +23,7 @@ export default function Modal({
     <div className="modal-overlay">
       <div className="modal">
         <h3>{title}</h3>
-        <p>{body}</p>
+        {typeof body === "string" ? <p>{body}</p> : body}
         <div className="button-row">
           <Button variant="primary" onClick={onPrimary}>
             {primaryLabel}
