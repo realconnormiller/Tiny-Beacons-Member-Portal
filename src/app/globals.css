@@ -21,6 +21,8 @@
   --radius: 20px;
   --radius-sm: 14px;
   --max-width: 520px;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --serif: "Georgia", "Times New Roman", serif;
 }
 
 html {
@@ -28,7 +30,7 @@ html {
 }
 
 body {
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: var(--serif);
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.75;
@@ -49,7 +51,7 @@ a {
 }
 
 .page h1 {
-  font-family: "Georgia", serif;
+  font-family: var(--serif);
   font-size: 1.55rem;
   font-weight: 400;
   line-height: 1.45;
@@ -58,7 +60,7 @@ a {
 }
 
 .page h2 {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 0.95rem;
   font-weight: 400;
   color: var(--color-text-muted);
@@ -66,7 +68,7 @@ a {
   margin-bottom: 44px;
 }
 
-/* ---- Hero (welcome page) ---- */
+/* ---- Hero (welcome) ---- */
 
 .hero {
   position: relative;
@@ -87,56 +89,6 @@ a {
 .hero h2 {
   position: relative;
   margin-bottom: 0;
-}
-
-/* ---- Cards ---- */
-
-.card {
-  background: var(--color-surface);
-  border: none;
-  border-radius: var(--radius);
-  padding: 28px;
-  margin-bottom: 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-
-.card h3 {
-  font-family: "Georgia", serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  margin-bottom: 10px;
-}
-
-.card p {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: var(--color-text-muted);
-  font-size: 0.88rem;
-  line-height: 1.65;
-  margin-bottom: 12px;
-}
-
-/* Invitation card — softer, more spacious */
-.invitation-card {
-  background: var(--color-surface);
-  border: none;
-  border-radius: var(--radius);
-  padding: 32px 28px;
-  margin-bottom: 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-
-.invitation-card h3 {
-  font-family: "Georgia", serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  margin-bottom: 12px;
-}
-
-.invitation-card p {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: var(--color-text-muted);
-  font-size: 0.88rem;
-  line-height: 1.7;
 }
 
 /* ---- Reassurance card (non-interactive) ---- */
@@ -161,11 +113,36 @@ a {
 }
 
 .reassurance-text {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 0.9rem;
   color: var(--color-text-muted);
   line-height: 1.6;
   padding-top: 6px;
+}
+
+/* ---- Invitation card ---- */
+
+.invitation-card {
+  background: var(--color-surface);
+  border: none;
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.invitation-card h3 {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.invitation-card p {
+  font-family: var(--sans);
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
 }
 
 /* ---- Buttons ---- */
@@ -178,7 +155,7 @@ a {
   margin-top: 40px;
 }
 
-/* ---- Soft container (for form groups) ---- */
+/* ---- Soft container (form groups) ---- */
 
 .soft-container {
   background: var(--color-warm);
@@ -194,7 +171,7 @@ a {
 }
 
 .section-title {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 0.92rem;
   font-weight: 500;
   color: var(--color-text);
@@ -203,7 +180,7 @@ a {
 }
 
 .helper-text {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 0.8rem;
   color: var(--color-text-muted);
   margin-top: 10px;
@@ -214,7 +191,7 @@ a {
 
 label {
   display: block;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 0.85rem;
   margin-bottom: 6px;
   font-weight: 500;
@@ -228,7 +205,7 @@ select {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   font-size: 0.9rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   background: var(--color-surface);
   margin-bottom: 14px;
   color: var(--color-text);
@@ -256,7 +233,7 @@ input[type="text"]::placeholder {
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 0.88rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   transition: border-color 0.2s, background 0.2s;
   background: var(--color-surface);
   color: var(--color-text-muted);
@@ -273,7 +250,7 @@ input[type="text"]::placeholder {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
 }
 
 .toggle {
@@ -313,25 +290,121 @@ input[type="text"]::placeholder {
   left: 2px;
 }
 
-/* ---- Belonging paragraphs (replaces bullet lists) ---- */
+/* ---- Belonging paragraphs ---- */
 
 .belonging-section {
   margin-bottom: 44px;
 }
 
 .belonging-section p {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 0.92rem;
   color: var(--color-text-muted);
   line-height: 1.7;
   margin-bottom: 20px;
 }
 
+.belonging-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- Anchor card (home — primary story) ---- */
+
+.anchor-card {
+  background: var(--color-warm);
+  border: none;
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.anchor-card h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.anchor-card .anchor-story-name {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.anchor-card p {
+  font-family: var(--sans);
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+/* ---- Companion card (home — secondary story, quieter) ---- */
+
+.companion-card {
+  background: var(--color-surface);
+  border: none;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.companion-card h4 {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.companion-card .companion-story-name {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.companion-card p {
+  font-family: var(--sans);
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+/* ---- Secondary links ---- */
+
+.secondary-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.secondary-link {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  text-align: left;
+}
+
+.secondary-link:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
 /* ---- Footer ---- */
 
 .footer-note {
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 0.84rem;
   color: var(--color-text-muted);
   margin-top: 60px;
@@ -360,73 +433,19 @@ input[type="text"]::placeholder {
 }
 
 .modal h3 {
-  font-family: "Georgia", serif;
+  font-family: var(--serif);
   font-size: 1.3rem;
   font-weight: 400;
   margin-bottom: 12px;
 }
 
 .modal p {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   color: var(--color-text-muted);
   margin-bottom: 32px;
   line-height: 1.7;
   white-space: pre-line;
   font-size: 0.92rem;
-}
-
-/* ---- Primary card (home page) ---- */
-
-.primary-card {
-  background: var(--color-warm);
-  border: none;
-  border-radius: var(--radius);
-  padding: 40px 32px;
-  margin-bottom: 32px;
-  text-align: center;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
-}
-
-.primary-card h3 {
-  font-family: "Georgia", serif;
-  font-size: 1.15rem;
-  font-weight: 400;
-  margin-bottom: 20px;
-}
-
-.primary-card p {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: var(--color-text-muted);
-  font-size: 0.84rem;
-  margin-top: 16px;
-  line-height: 1.5;
-}
-
-/* ---- Secondary links (home page) ---- */
-
-.secondary-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-top: 8px;
-}
-
-.secondary-link {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.88rem;
-  color: var(--color-text-muted);
-  padding: 16px 0;
-  border-bottom: 1px solid var(--color-border);
-  cursor: pointer;
-  background: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  text-align: left;
-}
-
-.secondary-link:first-child {
-  border-top: 1px solid var(--color-border);
 }
 
 /* ---- Collapsible trigger ---- */
@@ -435,7 +454,7 @@ input[type="text"]::placeholder {
   background: none;
   border: none;
   cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--color-primary);

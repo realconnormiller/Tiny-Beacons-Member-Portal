@@ -22,13 +22,18 @@ export default function StartHerePage() {
     <div className="page">
       <Logo />
       <h1>Your first Tiny Moment starts here.</h1>
-      <h2>Watch a short story. Ask one simple question. That&rsquo;s it.</h2>
+      <h2>
+        Watch a short story with your child. Ask one simple question.
+        That&rsquo;s it.
+      </h2>
 
       {/* Watch */}
       <div className="invitation-card">
-        <h3>Watch tonight&rsquo;s story</h3>
+        <h3>Watch the story together</h3>
         <VideoPlaceholder />
-        <p style={{ marginTop: "10px" }}>Short. Calm. Made for little hearts.</p>
+        <p style={{ marginTop: "12px" }}>
+          Short. Calm. Made for little hearts.
+        </p>
       </div>
 
       {/* Ask */}
@@ -40,24 +45,28 @@ export default function StartHerePage() {
             color: "var(--color-text)",
             fontSize: "1rem",
             marginBottom: "16px",
-            fontFamily: '"Georgia", serif',
+            fontFamily: "var(--serif)",
           }}
         >
           &ldquo;Where did you see something good today?&rdquo;
         </p>
         <Button variant="primary" onClick={handleComplete}>
-          We asked this
+          We tried this
         </Button>
         <p className="helper-text" style={{ marginTop: "12px" }}>
-          Any answer is perfect.
+          Any answer is perfect. Even silence counts.
         </p>
       </div>
 
       {/* Optional help */}
       <div className="invitation-card">
         <h3>If you&rsquo;d like a little help</h3>
+        <p style={{ marginBottom: "14px" }}>
+          A one-page guide with a few conversation starters &mdash; nothing
+          more.
+        </p>
         <Button variant="secondary" onClick={handleComplete}>
-          Download the one-page guide
+          Download the guide
         </Button>
         <p className="helper-text" style={{ marginTop: "12px" }}>
           Totally optional.
@@ -68,9 +77,9 @@ export default function StartHerePage() {
         <Modal
           title="That counts. Truly."
           body={
-            "You just created a faith moment in your home.\nThat's the whole heart of Tiny Beacons."
+            "You just created a faith moment in your home.\nThat\u2019s the whole heart of Tiny Beacons."
           }
-          primaryLabel="That's enough for today"
+          primaryLabel="That\u2019s enough for today"
           secondaryLabel="Go to home"
           onPrimary={() => router.push("/done")}
           onSecondary={() => router.push("/home")}

@@ -10,7 +10,7 @@ export default function DonePage() {
   return (
     <div className="page">
       <Logo />
-      <h1>You&rsquo;re officially a Tiny Beacons family.</h1>
+      <h1>You&rsquo;re a Tiny Beacons family now.</h1>
       <h2>
         You don&rsquo;t need to do this perfectly.
         <br />
@@ -18,9 +18,18 @@ export default function DonePage() {
       </h2>
 
       <div className="belonging-section">
-        <p>One new story each month, whenever you&rsquo;re ready for it.</p>
-        <p>Gentle prompts when you want them &mdash; never when you don&rsquo;t.</p>
-        <p>Screen-free options for quieter days at home.</p>
+        <p>
+          A couple of new stories arrive each month. They&rsquo;ll be here
+          whenever you&rsquo;re ready &mdash; no rush, no schedule to keep.
+        </p>
+        <p>
+          Gentle prompts come alongside each story. Use them if they help.
+          Skip them if they don&rsquo;t. Either way is fine.
+        </p>
+        <p>
+          There are also screen-free printables for quieter days at home.
+          Everything is optional. Everything is enough.
+        </p>
       </div>
 
       <div className="button-row">

@@ -88,7 +88,7 @@ export default function SetupPage() {
                   color: "var(--color-text-muted)",
                   cursor: "pointer",
                   fontSize: "0.8rem",
-                  fontFamily: "inherit",
+                  fontFamily: "var(--sans)",
                 }}
               >
                 Remove
@@ -105,7 +105,7 @@ export default function SetupPage() {
             cursor: "pointer",
             fontSize: "0.85rem",
             fontWeight: 500,
-            fontFamily: "inherit",
+            fontFamily: "var(--sans)",
             padding: "4px 0",
           }}
         >

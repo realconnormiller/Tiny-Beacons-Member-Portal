@@ -12,13 +12,12 @@ export default function Button({
   onClick,
 }: ButtonProps) {
   const base: React.CSSProperties = {
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    fontFamily: "var(--sans)",
     fontSize: "0.9rem",
     fontWeight: 500,
     cursor: "pointer",
     border: "none",
-    transition: "background 0.2s, opacity 0.2s",
+    transition: "opacity 0.2s",
   };
 
   const styles: React.CSSProperties =

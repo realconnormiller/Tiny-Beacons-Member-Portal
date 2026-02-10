@@ -17,14 +17,14 @@ export default function WelcomePage() {
         <h2>
           Most parents want to lead spiritually at home.
           <br />
-          You don&rsquo;t need a plan &mdash; just a moment. We&rsquo;ll keep
-          this gentle.
+          You don&rsquo;t need a plan &mdash; just a moment.
+          We&rsquo;ll keep this gentle.
         </h2>
       </div>
 
       <ReassuranceCard
         icon="\u2728"
-        text="Learn about your child (only if you want)"
+        text="Learn about your family (only if you want)"
       />
       <ReassuranceCard
         icon="\uD83C\uDF19"
@@ -32,7 +32,7 @@ export default function WelcomePage() {
       />
       <ReassuranceCard
         icon="\uD83D\uDC9B"
-        text="Share one small faith moment tonight"
+        text="Share one small faith moment together"
       />
 
       <div className="button-row">
