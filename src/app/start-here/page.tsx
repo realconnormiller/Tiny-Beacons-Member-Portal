@@ -7,6 +7,7 @@ import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
+import CharacterImage from "@/components/CharacterImage";
 
 function PlayIcon() {
   return (
@@ -45,7 +46,8 @@ export default function StartHerePage() {
       <h2>Watch a story. Ask one question. That&rsquo;s enough.</h2>
 
       {/* Watch */}
-      <div className="content-card">
+      <div className="content-card" style={{ position: "relative" }}>
+        <CharacterImage src="/characters/luca.png" position="br" size={90} opacity={0.15} />
         <h3>
           <span className="section-icon"><PlayIcon /></span>
           Watch the story together

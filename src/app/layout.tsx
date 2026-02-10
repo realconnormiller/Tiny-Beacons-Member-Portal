@@ -1,5 +1,12 @@
 import "./globals.css";
 import { UserProvider } from "@/context/UserContext";
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata = {
   title: "Tiny Beacons",

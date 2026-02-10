@@ -6,6 +6,7 @@ import { useUser } from "@/context/UserContext";
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
+import CharacterImage from "@/components/CharacterImage";
 
 const EMOTION_VERSES: Record<string, { verse: string; reference: string }> = {
   Anxious: {
@@ -176,7 +177,8 @@ function MemberHome() {
       </div>
 
       {/* Emotion → Verse widget */}
-      <div className="emotion-widget">
+      <div className="emotion-widget" style={{ position: "relative" }}>
+        <CharacterImage src="/characters/copper.png" position="br" size={100} opacity={0.15} />
         <h4>
           <span className="section-icon"><StarIcon /></span>
           Need a steady word?

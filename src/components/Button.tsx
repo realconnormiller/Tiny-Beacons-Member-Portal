@@ -37,12 +37,15 @@ export default function Button({
       : variant === "link"
         ? {
             ...base,
-            padding: "0",
+            padding: "8px 0",
+            minHeight: "44px",
             borderRadius: "0",
             background: "transparent",
             color: "var(--color-text-muted)",
             fontWeight: 400,
             fontSize: "0.88rem",
+            display: "inline-flex",
+            alignItems: "center",
           }
         : {
             ...base,
@@ -54,22 +57,23 @@ export default function Button({
             boxShadow: "0 1px 3px rgba(0, 0, 0, 0.03)",
           };
 
+  function pressIn(el: HTMLButtonElement) {
+    if (variant !== "link") el.style.transform = "scale(0.97)";
+  }
+  function pressOut(el: HTMLButtonElement) {
+    el.style.transform = "scale(1)";
+  }
+
   return (
     <button
       style={styles}
       onClick={onClick}
-      onMouseDown={(e) => {
-        if (variant !== "link") {
-          (e.currentTarget as HTMLButtonElement).style.transform =
-            "scale(0.97)";
-        }
-      }}
-      onMouseUp={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
-      }}
+      onMouseDown={(e) => pressIn(e.currentTarget)}
+      onMouseUp={(e) => pressOut(e.currentTarget)}
+      onMouseLeave={(e) => pressOut(e.currentTarget)}
+      onTouchStart={(e) => pressIn(e.currentTarget)}
+      onTouchEnd={(e) => pressOut(e.currentTarget)}
+      onTouchCancel={(e) => pressOut(e.currentTarget)}
     >
       {children}
     </button>
