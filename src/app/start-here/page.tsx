@@ -45,44 +45,84 @@ export default function StartHerePage() {
       <h1>Your first Tiny Moment starts right here.</h1>
       <h2>Watch a story. Ask one question. That&rsquo;s enough.</h2>
 
-      {/* Watch — family peeks from behind the card */}
+      {/* Watch — family peeks from sides of the card via mask windows */}
       <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
-        <CharacterImage
-          src="/characters/connor.png"
-          anchor="tl"
-          size={360}
-          offsetX={-240}
-          offsetY={30}
-          opacity={0.55}
-          objectPosition="left top"
-        />
-        <CharacterImage
-          src="/characters/grace.png"
-          anchor="tl"
-          size={340}
-          offsetX={-190}
-          offsetY={80}
-          opacity={0.55}
-          objectPosition="left top"
-        />
-        <CharacterImage
-          src="/characters/brodie.png"
-          anchor="tr"
-          size={340}
-          offsetX={240}
-          offsetY={30}
-          opacity={0.55}
-          objectPosition="right top"
-        />
-        <CharacterImage
-          src="/characters/luca.png"
-          anchor="tr"
-          size={320}
-          offsetX={190}
-          offsetY={80}
-          opacity={0.55}
-          objectPosition="right top"
-        />
+
+        {/* LEFT PEEK MASK (parents) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            zIndex: 0,
+            pointerEvents: "none",
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            overflow: "hidden",
+            left: -8,
+            top: 58,
+            width: 190,
+            height: 210,
+          }}
+        >
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <CharacterImage
+              src="/characters/connor.png"
+              anchor="tl"
+              size={360}
+              offsetX={-210}
+              offsetY={-40}
+              opacity={0.58}
+              objectPosition="left top"
+            />
+            <CharacterImage
+              src="/characters/grace.png"
+              anchor="tl"
+              size={340}
+              offsetX={-185}
+              offsetY={55}
+              opacity={0.58}
+              objectPosition="left top"
+            />
+          </div>
+        </div>
+
+        {/* RIGHT PEEK MASK (kids) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            zIndex: 0,
+            pointerEvents: "none",
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            overflow: "hidden",
+            right: -8,
+            top: 58,
+            width: 190,
+            height: 210,
+          }}
+        >
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <CharacterImage
+              src="/characters/brodie.png"
+              anchor="tr"
+              size={340}
+              offsetX={210}
+              offsetY={-40}
+              opacity={0.58}
+              objectPosition="right top"
+            />
+            <CharacterImage
+              src="/characters/luca.png"
+              anchor="tr"
+              size={320}
+              offsetX={185}
+              offsetY={55}
+              opacity={0.58}
+              objectPosition="right top"
+            />
+          </div>
+        </div>
 
         <div className="story-panel" style={{ position: "relative", zIndex: 10 }}>
           <h3>
