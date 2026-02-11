@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 type Position = "tl" | "tr" | "bl" | "br";
 
@@ -24,6 +27,10 @@ export default function CharacterImage({
   size = 120,
   opacity = 0.28,
 }: CharacterImageProps) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed || !src) return null;
+
   return (
     <div
       aria-hidden="true"
@@ -54,6 +61,7 @@ export default function CharacterImage({
         }}
         draggable={false}
         unoptimized
+        onError={() => setFailed(true)}
       />
     </div>
   );
