@@ -99,27 +99,48 @@ export default function StartHerePage() {
         </div>
       </div>
 
-      {/* Ask */}
-      <div className="story-panel" style={{ position: "relative" }}>
-        <div className="watermark watermark--leaf" aria-hidden="true" style={{ top: 8, right: 10 }} />
-        <h3>
-          <span className="section-icon"><ChatIcon /></span>
-          Ask one question
-        </h3>
-        <p
-          style={{
-            fontStyle: "italic",
-            color: "var(--color-text)",
-            fontSize: "1rem",
-            marginBottom: "16px",
-            fontFamily: "var(--serif)",
-          }}
-        >
-          &ldquo;Where did you see something good today?&rdquo;
-        </p>
-        <Button variant="secondary" onClick={handleComplete}>
-          We asked this
-        </Button>
+      {/* Ask — dogs peek from behind the card */}
+      <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
+        <CharacterImage
+          src="/characters/copper.png"
+          anchor="bl"
+          size={300}
+          offsetX={-180}
+          offsetY={60}
+          opacity={0.65}
+          objectPosition="left bottom"
+        />
+        <CharacterImage
+          src="/characters/zero.png"
+          anchor="br"
+          size={300}
+          offsetX={180}
+          offsetY={60}
+          opacity={0.65}
+          objectPosition="right bottom"
+        />
+
+        <div className="story-panel" style={{ position: "relative", zIndex: 10 }}>
+          <div className="watermark watermark--leaf" aria-hidden="true" style={{ top: 8, right: 10 }} />
+          <h3>
+            <span className="section-icon"><ChatIcon /></span>
+            Ask one question
+          </h3>
+          <p
+            style={{
+              fontStyle: "italic",
+              color: "var(--color-text)",
+              fontSize: "1rem",
+              marginBottom: "16px",
+              fontFamily: "var(--serif)",
+            }}
+          >
+            &ldquo;Where did you see something good today?&rdquo;
+          </p>
+          <Button variant="secondary" onClick={handleComplete}>
+            We asked this
+          </Button>
+        </div>
       </div>
 
       {showModal && (
