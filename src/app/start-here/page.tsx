@@ -48,33 +48,91 @@ export default function StartHerePage() {
       {/* Watch — family peeks from sides of the card via peek windows */}
       <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
 
-        {/* LEFT PEEK WINDOW (Connor + Grace) */}
-        <div aria-hidden="true" style={{ position: "absolute", zIndex: 0, overflow: "hidden", pointerEvents: "none", width: 230, height: 160, top: 18, left: -28, borderRadius: 18 }}>
+        {/* WATCH — LEFT PEEK WINDOW (parents) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: -10,
+            top: 62,
+            width: 210,
+            height: 220,
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage src="/characters/connor.png" anchor="bl" size={340} offsetX={-210} offsetY={120} opacity={0.62} objectPosition="left bottom" />
-            <CharacterImage src="/characters/grace.png" anchor="bl" size={320} offsetX={-180} offsetY={145} opacity={0.62} objectPosition="left bottom" />
+            <CharacterImage
+              src="/characters/connor.png"
+              anchor="tl"
+              size={420}
+              offsetX={-290}
+              offsetY={-90}
+              opacity={0.62}
+              objectPosition="left top"
+            />
+            <CharacterImage
+              src="/characters/grace.png"
+              anchor="tl"
+              size={400}
+              offsetX={-255}
+              offsetY={30}
+              opacity={0.62}
+              objectPosition="left top"
+            />
           </div>
         </div>
 
-        {/* RIGHT PEEK WINDOW (Brodie + Luca) */}
-        <div aria-hidden="true" style={{ position: "absolute", zIndex: 0, overflow: "hidden", pointerEvents: "none", width: 230, height: 160, top: 18, right: -28, borderRadius: 18 }}>
+        {/* WATCH — RIGHT PEEK WINDOW (kids) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            right: -10,
+            top: 62,
+            width: 210,
+            height: 220,
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage src="/characters/brodie.png" anchor="br" size={320} offsetX={210} offsetY={120} opacity={0.62} objectPosition="right bottom" />
-            <CharacterImage src="/characters/luca.png" anchor="br" size={300} offsetX={180} offsetY={145} opacity={0.62} objectPosition="right bottom" />
+            <CharacterImage
+              src="/characters/brodie.png"
+              anchor="tr"
+              size={400}
+              offsetX={290}
+              offsetY={-90}
+              opacity={0.62}
+              objectPosition="right top"
+            />
+            <CharacterImage
+              src="/characters/luca.png"
+              anchor="tr"
+              size={380}
+              offsetX={255}
+              offsetY={30}
+              opacity={0.62}
+              objectPosition="right top"
+            />
           </div>
         </div>
 
-        <div className="story-panel" style={{ position: "relative", zIndex: 10 }}>
-          <h3>
-            <span className="section-icon"><PlayIcon /></span>
-            Watch the story together
-          </h3>
-          <VideoPlaceholder />
-          <p style={{ marginTop: "12px" }}>Short. Calm. Kid-friendly.</p>
-          <div style={{ marginTop: "16px" }}>
-            <Button variant="secondary" onClick={handleComplete}>
-              We watched this
-            </Button>
+        <div style={{ position: "relative", zIndex: 10 }}>
+          <div className="story-panel">
+            <h3>
+              <span className="section-icon"><PlayIcon /></span>
+              Watch the story together
+            </h3>
+            <VideoPlaceholder />
+            <p style={{ marginTop: "12px" }}>Short. Calm. Kid-friendly.</p>
+            <div style={{ marginTop: "16px" }}>
+              <Button variant="secondary" onClick={handleComplete}>
+                We watched this
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -82,40 +140,82 @@ export default function StartHerePage() {
       {/* Ask — dogs peek from sides of the card via peek windows */}
       <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
 
-        {/* LEFT DOG (Copper) */}
-        <div aria-hidden="true" style={{ position: "absolute", zIndex: 0, overflow: "hidden", pointerEvents: "none", width: 210, height: 150, top: 22, left: -26, borderRadius: 18 }}>
+        {/* ASK — LEFT PEEK WINDOW (copper) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: -10,
+            top: 46,
+            width: 200,
+            height: 200,
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage src="/characters/copper.png" anchor="bl" size={280} offsetX={-170} offsetY={105} opacity={0.68} objectPosition="left bottom" />
+            <CharacterImage
+              src="/characters/copper.png"
+              anchor="tl"
+              size={360}
+              offsetX={-250}
+              offsetY={-70}
+              opacity={0.62}
+              objectPosition="left top"
+            />
           </div>
         </div>
 
-        {/* RIGHT DOG (Zero) */}
-        <div aria-hidden="true" style={{ position: "absolute", zIndex: 0, overflow: "hidden", pointerEvents: "none", width: 210, height: 150, top: 22, right: -26, borderRadius: 18 }}>
+        {/* ASK — RIGHT PEEK WINDOW (zero) */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            right: -10,
+            top: 46,
+            width: 200,
+            height: 200,
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage src="/characters/zero.png" anchor="br" size={280} offsetX={170} offsetY={105} opacity={0.68} objectPosition="right bottom" />
+            <CharacterImage
+              src="/characters/zero.png"
+              anchor="tr"
+              size={360}
+              offsetX={250}
+              offsetY={-70}
+              opacity={0.62}
+              objectPosition="right top"
+            />
           </div>
         </div>
 
-        <div className="story-panel" style={{ position: "relative", zIndex: 10 }}>
-          <div className="watermark watermark--leaf" aria-hidden="true" style={{ top: 8, right: 10 }} />
-          <h3>
-            <span className="section-icon"><ChatIcon /></span>
-            Ask one question
-          </h3>
-          <p
-            style={{
-              fontStyle: "italic",
-              color: "var(--color-text)",
-              fontSize: "1rem",
-              marginBottom: "16px",
-              fontFamily: "var(--serif)",
-            }}
-          >
-            &ldquo;Where did you see something good today?&rdquo;
-          </p>
-          <Button variant="secondary" onClick={handleComplete}>
-            We asked this
-          </Button>
+        <div style={{ position: "relative", zIndex: 10 }}>
+          <div className="story-panel">
+            <div className="watermark watermark--leaf" aria-hidden="true" style={{ top: 8, right: 10 }} />
+            <h3>
+              <span className="section-icon"><ChatIcon /></span>
+              Ask one question
+            </h3>
+            <p
+              style={{
+                fontStyle: "italic",
+                color: "var(--color-text)",
+                fontSize: "1rem",
+                marginBottom: "16px",
+                fontFamily: "var(--serif)",
+              }}
+            >
+              &ldquo;Where did you see something good today?&rdquo;
+            </p>
+            <Button variant="secondary" onClick={handleComplete}>
+              We asked this
+            </Button>
+          </div>
         </div>
       </div>
 
