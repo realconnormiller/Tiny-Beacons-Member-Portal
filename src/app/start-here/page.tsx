@@ -50,37 +50,37 @@ export default function StartHerePage() {
         <CharacterImage
           src="/characters/connor.png"
           anchor="bl"
-          size={340}
-          offsetX={-110}
-          offsetY={40}
-          opacity={0.55}
+          size={420}
+          offsetX={-240}
+          offsetY={120}
+          opacity={0.6}
           objectPosition="left bottom"
         />
         <CharacterImage
           src="/characters/grace.png"
           anchor="bl"
-          size={320}
-          offsetX={-70}
-          offsetY={85}
-          opacity={0.55}
+          size={380}
+          offsetX={-180}
+          offsetY={160}
+          opacity={0.6}
           objectPosition="left bottom"
         />
         <CharacterImage
           src="/characters/brodie.png"
           anchor="br"
-          size={320}
-          offsetX={110}
-          offsetY={40}
-          opacity={0.55}
+          size={380}
+          offsetX={240}
+          offsetY={120}
+          opacity={0.6}
           objectPosition="right bottom"
         />
         <CharacterImage
           src="/characters/luca.png"
           anchor="br"
-          size={300}
-          offsetX={70}
-          offsetY={85}
-          opacity={0.55}
+          size={360}
+          offsetX={180}
+          offsetY={160}
+          opacity={0.6}
           objectPosition="right bottom"
         />
 
