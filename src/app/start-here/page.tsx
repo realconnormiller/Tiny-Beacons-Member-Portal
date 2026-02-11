@@ -45,19 +45,57 @@ export default function StartHerePage() {
       <h1>Your first Tiny Moment starts right here.</h1>
       <h2>Watch a story. Ask one question. That&rsquo;s enough.</h2>
 
-      {/* Watch */}
-      <div className="story-panel" style={{ position: "relative" }}>
-        <CharacterImage src="/characters/luca.png" anchor="br" size={110} opacity={0.22} offsetX={10} offsetY={18} objectPosition="center bottom" />
-        <h3>
-          <span className="section-icon"><PlayIcon /></span>
-          Watch the story together
-        </h3>
-        <VideoPlaceholder />
-        <p style={{ marginTop: "12px" }}>Short. Calm. Kid-friendly.</p>
-        <div style={{ marginTop: "16px" }}>
-          <Button variant="secondary" onClick={handleComplete}>
-            We watched this
-          </Button>
+      {/* Watch — family peeks from behind the card */}
+      <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
+        <CharacterImage
+          src="/characters/connor.png"
+          anchor="bl"
+          size={340}
+          offsetX={-110}
+          offsetY={40}
+          opacity={0.55}
+          objectPosition="left bottom"
+        />
+        <CharacterImage
+          src="/characters/grace.png"
+          anchor="bl"
+          size={320}
+          offsetX={-70}
+          offsetY={85}
+          opacity={0.55}
+          objectPosition="left bottom"
+        />
+        <CharacterImage
+          src="/characters/brodie.png"
+          anchor="br"
+          size={320}
+          offsetX={110}
+          offsetY={40}
+          opacity={0.55}
+          objectPosition="right bottom"
+        />
+        <CharacterImage
+          src="/characters/luca.png"
+          anchor="br"
+          size={300}
+          offsetX={70}
+          offsetY={85}
+          opacity={0.55}
+          objectPosition="right bottom"
+        />
+
+        <div className="story-panel" style={{ position: "relative", zIndex: 10 }}>
+          <h3>
+            <span className="section-icon"><PlayIcon /></span>
+            Watch the story together
+          </h3>
+          <VideoPlaceholder />
+          <p style={{ marginTop: "12px" }}>Short. Calm. Kid-friendly.</p>
+          <div style={{ marginTop: "16px" }}>
+            <Button variant="secondary" onClick={handleComplete}>
+              We watched this
+            </Button>
+          </div>
         </div>
       </div>
 
