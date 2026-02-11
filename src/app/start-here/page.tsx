@@ -7,7 +7,7 @@ import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
-import CharacterImage from "@/components/CharacterImage";
+import Image from "next/image";
 
 function PlayIcon() {
   return (
@@ -63,23 +63,35 @@ export default function StartHerePage() {
           }}
         >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage
+            <Image
               src="/characters/connor.png"
-              anchor="tl"
-              size={420}
-              offsetX={-290}
-              offsetY={-90}
-              opacity={0.62}
-              objectPosition="left top"
+              alt=""
+              width={420}
+              height={420}
+              unoptimized
+              draggable={false}
+              style={{
+                position: "absolute",
+                left: -290,
+                top: -90,
+                opacity: 0.62,
+                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
+              }}
             />
-            <CharacterImage
+            <Image
               src="/characters/grace.png"
-              anchor="tl"
-              size={400}
-              offsetX={-255}
-              offsetY={30}
-              opacity={0.62}
-              objectPosition="left top"
+              alt=""
+              width={400}
+              height={400}
+              unoptimized
+              draggable={false}
+              style={{
+                position: "absolute",
+                left: -255,
+                top: 30,
+                opacity: 0.62,
+                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
+              }}
             />
           </div>
         </div>
@@ -99,23 +111,35 @@ export default function StartHerePage() {
           }}
         >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage
+            <Image
               src="/characters/brodie.png"
-              anchor="tr"
-              size={400}
-              offsetX={290}
-              offsetY={-90}
-              opacity={0.62}
-              objectPosition="right top"
+              alt=""
+              width={400}
+              height={400}
+              unoptimized
+              draggable={false}
+              style={{
+                position: "absolute",
+                right: -290,
+                top: -90,
+                opacity: 0.62,
+                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
+              }}
             />
-            <CharacterImage
+            <Image
               src="/characters/luca.png"
-              anchor="tr"
-              size={380}
-              offsetX={255}
-              offsetY={30}
-              opacity={0.62}
-              objectPosition="right top"
+              alt=""
+              width={380}
+              height={380}
+              unoptimized
+              draggable={false}
+              style={{
+                position: "absolute",
+                right: -255,
+                top: 30,
+                opacity: 0.62,
+                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
+              }}
             />
           </div>
         </div>
@@ -155,14 +179,20 @@ export default function StartHerePage() {
           }}
         >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage
+            <Image
               src="/characters/copper.png"
-              anchor="tl"
-              size={360}
-              offsetX={-250}
-              offsetY={-70}
-              opacity={0.62}
-              objectPosition="left top"
+              alt=""
+              width={360}
+              height={360}
+              unoptimized
+              draggable={false}
+              style={{
+                position: "absolute",
+                left: -250,
+                top: -70,
+                opacity: 0.62,
+                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
+              }}
             />
           </div>
         </div>
@@ -182,14 +212,20 @@ export default function StartHerePage() {
           }}
         >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage
+            <Image
               src="/characters/zero.png"
-              anchor="tr"
-              size={360}
-              offsetX={250}
-              offsetY={-70}
-              opacity={0.62}
-              objectPosition="right top"
+              alt=""
+              width={360}
+              height={360}
+              unoptimized
+              draggable={false}
+              style={{
+                position: "absolute",
+                right: -250,
+                top: -70,
+                opacity: 0.62,
+                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
+              }}
             />
           </div>
         </div>
