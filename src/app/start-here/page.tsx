@@ -8,6 +8,7 @@ import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
 import Image from "next/image";
+import CharacterImage from "@/components/CharacterImage";
 
 function PlayIcon() {
   return (
@@ -46,52 +47,41 @@ export default function StartHerePage() {
       <h2>Watch a story. Ask one question. That&rsquo;s enough.</h2>
 
       {/* Watch — family peeks from sides of the card via peek windows */}
-      <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
+      <div style={{ position: "relative" }}>
 
         {/* WATCH — LEFT PEEK WINDOW (parents) */}
         <div
           aria-hidden="true"
           style={{
             position: "absolute",
-            left: -10,
-            top: 62,
-            width: 210,
-            height: 220,
-            overflow: "hidden",
-            pointerEvents: "none",
             zIndex: 0,
+            pointerEvents: "none",
+            userSelect: "none",
+            overflow: "hidden",
+            width: 220,
+            height: 190,
+            left: -26,
+            top: 86,
           }}
         >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <Image
+            <CharacterImage
               src="/characters/connor.png"
-              alt=""
-              width={420}
-              height={420}
-              unoptimized
-              draggable={false}
-              style={{
-                position: "absolute",
-                left: -290,
-                top: -90,
-                opacity: 0.62,
-                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
-              }}
+              anchor="tl"
+              size={380}
+              offsetX={-235}
+              offsetY={-60}
+              opacity={0.62}
+              objectPosition="left top"
             />
-            <Image
+            <CharacterImage
               src="/characters/grace.png"
-              alt=""
-              width={400}
-              height={400}
-              unoptimized
-              draggable={false}
-              style={{
-                position: "absolute",
-                left: -255,
-                top: 30,
-                opacity: 0.62,
-                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
-              }}
+              anchor="tl"
+              size={360}
+              offsetX={-210}
+              offsetY={35}
+              opacity={0.62}
+              objectPosition="left top"
             />
           </div>
         </div>
@@ -101,45 +91,34 @@ export default function StartHerePage() {
           aria-hidden="true"
           style={{
             position: "absolute",
-            right: -10,
-            top: 62,
-            width: 210,
-            height: 220,
-            overflow: "hidden",
-            pointerEvents: "none",
             zIndex: 0,
+            pointerEvents: "none",
+            userSelect: "none",
+            overflow: "hidden",
+            width: 220,
+            height: 190,
+            right: -26,
+            top: 86,
           }}
         >
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <Image
+            <CharacterImage
               src="/characters/brodie.png"
-              alt=""
-              width={400}
-              height={400}
-              unoptimized
-              draggable={false}
-              style={{
-                position: "absolute",
-                right: -290,
-                top: -90,
-                opacity: 0.62,
-                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
-              }}
+              anchor="tr"
+              size={360}
+              offsetX={235}
+              offsetY={-60}
+              opacity={0.62}
+              objectPosition="right top"
             />
-            <Image
+            <CharacterImage
               src="/characters/luca.png"
-              alt=""
-              width={380}
-              height={380}
-              unoptimized
-              draggable={false}
-              style={{
-                position: "absolute",
-                right: -255,
-                top: 30,
-                opacity: 0.62,
-                filter: "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
-              }}
+              anchor="tr"
+              size={340}
+              offsetX={210}
+              offsetY={35}
+              opacity={0.62}
+              objectPosition="right top"
             />
           </div>
         </div>
