@@ -49,39 +49,39 @@ export default function StartHerePage() {
       <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
         <CharacterImage
           src="/characters/connor.png"
-          anchor="bl"
-          size={420}
+          anchor="tl"
+          size={360}
           offsetX={-240}
-          offsetY={120}
-          opacity={0.6}
-          objectPosition="left bottom"
+          offsetY={30}
+          opacity={0.55}
+          objectPosition="left top"
         />
         <CharacterImage
           src="/characters/grace.png"
-          anchor="bl"
-          size={380}
-          offsetX={-180}
-          offsetY={160}
-          opacity={0.6}
-          objectPosition="left bottom"
+          anchor="tl"
+          size={340}
+          offsetX={-190}
+          offsetY={80}
+          opacity={0.55}
+          objectPosition="left top"
         />
         <CharacterImage
           src="/characters/brodie.png"
-          anchor="br"
-          size={380}
+          anchor="tr"
+          size={340}
           offsetX={240}
-          offsetY={120}
-          opacity={0.6}
-          objectPosition="right bottom"
+          offsetY={30}
+          opacity={0.55}
+          objectPosition="right top"
         />
         <CharacterImage
           src="/characters/luca.png"
-          anchor="br"
-          size={360}
-          offsetX={180}
-          offsetY={160}
-          opacity={0.6}
-          objectPosition="right bottom"
+          anchor="tr"
+          size={320}
+          offsetX={190}
+          offsetY={80}
+          opacity={0.55}
+          objectPosition="right top"
         />
 
         <div className="story-panel" style={{ position: "relative", zIndex: 10 }}>
