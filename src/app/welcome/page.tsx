@@ -23,7 +23,7 @@ export default function WelcomePage() {
       <Logo />
 
       <div className="hero" style={{ position: "relative" }}>
-        <CharacterImage src="/characters/connor.png" position="br" size={130} opacity={0.28} />
+        <CharacterImage src="/characters/connor.png" anchor="br" size={130} opacity={0.28} />
         <h1>Welcome to Tiny Beacons. You&rsquo;re in the right place.</h1>
         <h2>
           Most parents want to lead spiritually at home &mdash; we&rsquo;ll

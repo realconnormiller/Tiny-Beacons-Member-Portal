@@ -3,29 +3,35 @@
 import Image from "next/image";
 import { useState } from "react";
 
-type Position = "tl" | "tr" | "bl" | "br";
+type Anchor = "br" | "tr" | "bl" | "tl";
 
 interface CharacterImageProps {
   src: string;
-  alt?: string;
-  position: Position;
+  className?: string;
   size?: number;
   opacity?: number;
+  anchor?: Anchor;
+  offsetX?: number;
+  offsetY?: number;
+  objectPosition?: string;
 }
 
-const positionStyles: Record<Position, React.CSSProperties> = {
-  tl: { top: -12, left: -10 },
-  tr: { top: -12, right: -10 },
-  bl: { bottom: -16, left: -8 },
-  br: { bottom: -16, right: -8 },
+const anchorStyles: Record<Anchor, React.CSSProperties> = {
+  br: { right: 0, bottom: 0 },
+  tr: { right: 0, top: 0 },
+  bl: { left: 0, bottom: 0 },
+  tl: { left: 0, top: 0 },
 };
 
 export default function CharacterImage({
   src,
-  alt = "",
-  position,
-  size = 120,
-  opacity = 0.28,
+  className,
+  size = 180,
+  opacity = 0.38,
+  anchor = "br",
+  offsetX = 0,
+  offsetY = 0,
+  objectPosition = "center",
 }: CharacterImageProps) {
   const [failed, setFailed] = useState(false);
 
@@ -34,30 +40,32 @@ export default function CharacterImage({
   return (
     <div
       aria-hidden="true"
+      className={className}
       style={{
         position: "absolute",
         pointerEvents: "none",
         zIndex: 0,
-        overflow: "hidden",
         userSelect: "none",
         WebkitUserSelect: "none",
         width: size,
         height: size,
-        borderRadius: "18px",
-        ...positionStyles[position],
+        opacity,
+        filter:
+          "saturate(1.02) contrast(1.05) drop-shadow(0 10px 18px rgba(0,0,0,0.12))",
+        transform: `translate(${offsetX}px, ${offsetY}px)`,
+        ...anchorStyles[anchor],
       }}
     >
       <Image
         src={src}
-        alt={alt}
+        alt=""
         width={size}
         height={size}
         style={{
           width: "100%",
           height: "100%",
           objectFit: "contain",
-          opacity,
-          filter: "saturate(0.8) brightness(1.05)",
+          objectPosition,
         }}
         draggable={false}
         unoptimized

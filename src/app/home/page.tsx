@@ -178,7 +178,7 @@ function MemberHome() {
 
       {/* Emotion → Verse widget */}
       <div className="emotion-widget" style={{ position: "relative" }}>
-        <CharacterImage src="/characters/copper.png" position="br" size={110} opacity={0.25} />
+        <CharacterImage src="/characters/copper.png" anchor="br" size={110} opacity={0.25} />
         <h4>
           <span className="section-icon"><StarIcon /></span>
           Need a steady word?
