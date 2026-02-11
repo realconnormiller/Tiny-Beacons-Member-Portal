@@ -37,7 +37,7 @@ export default function StartHerePage() {
   }
 
   return (
-    <div className="page">
+    <div className="page" data-scene="twilight">
       <div className="page-blob page-blob--top-right" />
       <div className="page-blob page-blob--bottom-left" />
 
@@ -46,8 +46,8 @@ export default function StartHerePage() {
       <h2>Watch a story. Ask one question. That&rsquo;s enough.</h2>
 
       {/* Watch */}
-      <div className="content-card" style={{ position: "relative" }}>
-        <CharacterImage src="/characters/luca.png" anchor="br" size={100} opacity={0.25} />
+      <div className="story-panel" style={{ position: "relative" }}>
+        <CharacterImage src="/characters/luca.png" anchor="br" size={110} opacity={0.22} offsetX={10} offsetY={18} objectPosition="center bottom" />
         <h3>
           <span className="section-icon"><PlayIcon /></span>
           Watch the story together
@@ -62,7 +62,8 @@ export default function StartHerePage() {
       </div>
 
       {/* Ask */}
-      <div className="content-card">
+      <div className="story-panel" style={{ position: "relative" }}>
+        <div className="watermark watermark--leaf" aria-hidden="true" style={{ top: 8, right: 10 }} />
         <h3>
           <span className="section-icon"><ChatIcon /></span>
           Ask one question
