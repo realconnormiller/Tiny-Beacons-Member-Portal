@@ -45,82 +45,22 @@ export default function StartHerePage() {
       <h1>Your first Tiny Moment starts right here.</h1>
       <h2>Watch a story. Ask one question. That&rsquo;s enough.</h2>
 
-      {/* Watch — family peeks from sides of the card via mask windows */}
+      {/* Watch — family peeks from sides of the card via peek windows */}
       <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
 
-        {/* LEFT PEEK MASK (parents) */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            zIndex: 0,
-            pointerEvents: "none",
-            userSelect: "none",
-            WebkitUserSelect: "none",
-            overflow: "hidden",
-            left: -8,
-            top: 58,
-            width: 190,
-            height: 210,
-          }}
-        >
+        {/* LEFT PEEK WINDOW (Connor + Grace) */}
+        <div aria-hidden="true" style={{ position: "absolute", zIndex: 0, overflow: "hidden", pointerEvents: "none", width: 230, height: 160, top: 18, left: -28, borderRadius: 18 }}>
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage
-              src="/characters/connor.png"
-              anchor="tl"
-              size={360}
-              offsetX={-210}
-              offsetY={-40}
-              opacity={0.58}
-              objectPosition="left top"
-            />
-            <CharacterImage
-              src="/characters/grace.png"
-              anchor="tl"
-              size={340}
-              offsetX={-185}
-              offsetY={55}
-              opacity={0.58}
-              objectPosition="left top"
-            />
+            <CharacterImage src="/characters/connor.png" anchor="bl" size={340} offsetX={-210} offsetY={120} opacity={0.62} objectPosition="left bottom" />
+            <CharacterImage src="/characters/grace.png" anchor="bl" size={320} offsetX={-180} offsetY={145} opacity={0.62} objectPosition="left bottom" />
           </div>
         </div>
 
-        {/* RIGHT PEEK MASK (kids) */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            zIndex: 0,
-            pointerEvents: "none",
-            userSelect: "none",
-            WebkitUserSelect: "none",
-            overflow: "hidden",
-            right: -8,
-            top: 58,
-            width: 190,
-            height: 210,
-          }}
-        >
+        {/* RIGHT PEEK WINDOW (Brodie + Luca) */}
+        <div aria-hidden="true" style={{ position: "absolute", zIndex: 0, overflow: "hidden", pointerEvents: "none", width: 230, height: 160, top: 18, right: -28, borderRadius: 18 }}>
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <CharacterImage
-              src="/characters/brodie.png"
-              anchor="tr"
-              size={340}
-              offsetX={210}
-              offsetY={-40}
-              opacity={0.58}
-              objectPosition="right top"
-            />
-            <CharacterImage
-              src="/characters/luca.png"
-              anchor="tr"
-              size={320}
-              offsetX={185}
-              offsetY={55}
-              opacity={0.58}
-              objectPosition="right top"
-            />
+            <CharacterImage src="/characters/brodie.png" anchor="br" size={320} offsetX={210} offsetY={120} opacity={0.62} objectPosition="right bottom" />
+            <CharacterImage src="/characters/luca.png" anchor="br" size={300} offsetX={180} offsetY={145} opacity={0.62} objectPosition="right bottom" />
           </div>
         </div>
 
@@ -139,26 +79,22 @@ export default function StartHerePage() {
         </div>
       </div>
 
-      {/* Ask — dogs peek from behind the card */}
+      {/* Ask — dogs peek from sides of the card via peek windows */}
       <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
-        <CharacterImage
-          src="/characters/copper.png"
-          anchor="bl"
-          size={300}
-          offsetX={-180}
-          offsetY={60}
-          opacity={0.65}
-          objectPosition="left bottom"
-        />
-        <CharacterImage
-          src="/characters/zero.png"
-          anchor="br"
-          size={300}
-          offsetX={180}
-          offsetY={60}
-          opacity={0.65}
-          objectPosition="right bottom"
-        />
+
+        {/* LEFT DOG (Copper) */}
+        <div aria-hidden="true" style={{ position: "absolute", zIndex: 0, overflow: "hidden", pointerEvents: "none", width: 210, height: 150, top: 22, left: -26, borderRadius: 18 }}>
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <CharacterImage src="/characters/copper.png" anchor="bl" size={280} offsetX={-170} offsetY={105} opacity={0.68} objectPosition="left bottom" />
+          </div>
+        </div>
+
+        {/* RIGHT DOG (Zero) */}
+        <div aria-hidden="true" style={{ position: "absolute", zIndex: 0, overflow: "hidden", pointerEvents: "none", width: 210, height: 150, top: 22, right: -26, borderRadius: 18 }}>
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <CharacterImage src="/characters/zero.png" anchor="br" size={280} offsetX={170} offsetY={105} opacity={0.68} objectPosition="right bottom" />
+          </div>
+        </div>
 
         <div className="story-panel" style={{ position: "relative", zIndex: 10 }}>
           <div className="watermark watermark--leaf" aria-hidden="true" style={{ top: 8, right: 10 }} />
