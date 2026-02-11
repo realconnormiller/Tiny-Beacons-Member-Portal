@@ -186,35 +186,55 @@ function MemberHome() {
         </p>
       </div>
 
-      {/* Emotion → Verse widget */}
-      <div className="emotion-widget" style={{ position: "relative" }}>
-        <CharacterImage src={dogSrc} anchor="br" size={120} opacity={0.28} offsetX={14} offsetY={16} />
-        <h4>
-          <span className="section-icon"><StarIcon /></span>
-          Need a steady word?
-        </h4>
-        <div className="emotion-subtext">
-          Pick what you&rsquo;re feeling. We&rsquo;ll keep it simple.
-        </div>
-        <div className="emotion-pills">
-          {emotions.map((e) => (
-            <button
-              key={e}
-              className={`emotion-pill${selectedEmotion === e ? " selected" : ""}`}
-              onClick={() =>
-                setSelectedEmotion(selectedEmotion === e ? null : e)
-              }
-            >
-              {e}
-            </button>
-          ))}
-        </div>
-        {activeVerse && (
-          <div>
-            <div className="verse-display">{activeVerse.verse}</div>
-            <div className="verse-reference">{activeVerse.reference}</div>
+      {/* Emotion → Verse widget — dogs peek from behind */}
+      <div style={{ position: "relative", isolation: "isolate", overflow: "visible" }}>
+        <CharacterImage
+          src="/characters/copper.png"
+          anchor="bl"
+          size={260}
+          offsetX={-90}
+          offsetY={20}
+          opacity={0.6}
+          objectPosition="left bottom"
+        />
+        <CharacterImage
+          src="/characters/zero.png"
+          anchor="br"
+          size={260}
+          offsetX={90}
+          offsetY={20}
+          opacity={0.6}
+          objectPosition="right bottom"
+        />
+
+        <div className="emotion-widget" style={{ position: "relative", zIndex: 10 }}>
+          <h4>
+            <span className="section-icon"><StarIcon /></span>
+            Need a steady word?
+          </h4>
+          <div className="emotion-subtext">
+            Pick what you&rsquo;re feeling. We&rsquo;ll keep it simple.
           </div>
-        )}
+          <div className="emotion-pills">
+            {emotions.map((e) => (
+              <button
+                key={e}
+                className={`emotion-pill${selectedEmotion === e ? " selected" : ""}`}
+                onClick={() =>
+                  setSelectedEmotion(selectedEmotion === e ? null : e)
+                }
+              >
+                {e}
+              </button>
+            ))}
+          </div>
+          {activeVerse && (
+            <div>
+              <div className="verse-display">{activeVerse.verse}</div>
+              <div className="verse-reference">{activeVerse.reference}</div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Secondary links — text-only, visually quiet */}
