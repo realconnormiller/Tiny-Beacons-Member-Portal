@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useUser } from "@/context/UserContext";
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
@@ -79,25 +80,30 @@ function PublicHome() {
           with their kids &mdash; without pressure, perfection, or keeping up.
         </h2>
 
-        {/* Decorative family characters */}
+        {/* Family hero image */}
         <div
-          aria-hidden="true"
           style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: 4,
             marginTop: 20,
-            pointerEvents: "none",
-            userSelect: "none",
-            opacity: 0.22,
+            width: "100%",
+            maxWidth: 360,
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         >
-          <CharacterImage src="/characters/copper.png" anchor="bl" size={52} opacity={1} offsetX={0} offsetY={0} />
-          <CharacterImage src="/characters/brodie.png" anchor="bl" size={62} opacity={1} offsetX={0} offsetY={0} />
-          <CharacterImage src="/characters/connor.png" anchor="bl" size={72} opacity={1} offsetX={0} offsetY={0} />
-          <CharacterImage src="/characters/grace.png" anchor="bl" size={72} opacity={1} offsetX={0} offsetY={0} />
-          <CharacterImage src="/characters/luca.png" anchor="bl" size={62} opacity={1} offsetX={0} offsetY={0} />
-          <CharacterImage src="/characters/zero.png" anchor="bl" size={52} opacity={1} offsetX={0} offsetY={0} />
+          <Image
+            src="/characters/family-hero.png"
+            alt="Tiny Beacons family"
+            width={720}
+            height={720}
+            unoptimized
+            draggable={false}
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "var(--radius-lg)",
+              objectFit: "contain",
+            }}
+          />
         </div>
       </div>
 
