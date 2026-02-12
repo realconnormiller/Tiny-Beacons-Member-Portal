@@ -107,7 +107,7 @@ function PublicHome() {
           Nothing expires. Nothing stacks up.
         </p>
         <div style={{ marginTop: "20px" }}>
-          <Button variant="secondary" onClick={() => setShowPaywall(true)}>
+          <Button variant="secondary" onClick={() => router.push("/moment")}>
             See how this works
           </Button>
         </div>
