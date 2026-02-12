@@ -72,12 +72,33 @@ function PublicHome() {
 
       <Logo />
 
-      <div className="hero">
+      <div className="hero" style={{ position: "relative", overflow: "visible" }}>
         <h1>A gentle place for faith at home.</h1>
         <h2>
           Tiny Beacons helps parents create small, meaningful moments of faith
           with their kids &mdash; without pressure, perfection, or keeping up.
         </h2>
+
+        {/* Decorative family characters */}
+        <div
+          aria-hidden="true"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 4,
+            marginTop: 20,
+            pointerEvents: "none",
+            userSelect: "none",
+            opacity: 0.22,
+          }}
+        >
+          <CharacterImage src="/characters/copper.png" anchor="bl" size={52} opacity={1} offsetX={0} offsetY={0} />
+          <CharacterImage src="/characters/brodie.png" anchor="bl" size={62} opacity={1} offsetX={0} offsetY={0} />
+          <CharacterImage src="/characters/connor.png" anchor="bl" size={72} opacity={1} offsetX={0} offsetY={0} />
+          <CharacterImage src="/characters/grace.png" anchor="bl" size={72} opacity={1} offsetX={0} offsetY={0} />
+          <CharacterImage src="/characters/luca.png" anchor="bl" size={62} opacity={1} offsetX={0} offsetY={0} />
+          <CharacterImage src="/characters/zero.png" anchor="bl" size={52} opacity={1} offsetX={0} offsetY={0} />
+        </div>
       </div>
 
       <div className="button-row">
