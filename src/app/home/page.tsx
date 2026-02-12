@@ -67,83 +67,152 @@ function PublicHome() {
   const [showPaywall, setShowPaywall] = useState(false);
 
   return (
-    <div className="page">
+    <div className="page" style={{ padding: 0 }}>
       <div className="page-blob page-blob--top-right" />
       <div className="page-blob page-blob--bottom-left" />
 
-      <Logo />
+      {/* ── Full-bleed poster hero ── */}
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          minHeight: "92vh",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          background: "linear-gradient(180deg, var(--color-bg) 0%, var(--color-warm) 40%, var(--color-warm-deep) 100%)",
+        }}
+      >
+        {/* Family poster image — anchored to bottom */}
+        <Image
+          src="/characters/family-hero.png"
+          alt="Tiny Beacons family"
+          fill
+          unoptimized
+          draggable={false}
+          style={{
+            objectFit: "contain",
+            objectPosition: "bottom center",
+            pointerEvents: "none",
+          }}
+        />
 
-      <div className="hero" style={{ position: "relative", overflow: "visible" }}>
-        <h1>A gentle place for faith at home.</h1>
-        <h2>
-          Tiny Beacons helps parents create small, meaningful moments of faith
-          with their kids &mdash; without pressure, perfection, or keeping up.
-        </h2>
+        {/* Warm glow overlay behind text */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 70% 50% at 50% 28%, rgba(253,246,239,0.92) 0%, rgba(253,246,239,0.6) 40%, transparent 72%)",
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+        />
 
-        {/* Family hero image */}
+        {/* Edge vignette */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 55%, rgba(250,248,245,0.45) 100%)",
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+        />
+
+        {/* Hero content — upper portion */}
         <div
           style={{
-            marginTop: 20,
+            position: "relative",
+            zIndex: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            maxWidth: "var(--max-width)",
+            padding: "48px 24px 0",
             width: "100%",
-            maxWidth: 360,
-            marginLeft: "auto",
-            marginRight: "auto",
           }}
         >
-          <Image
-            src="/characters/family-hero.png"
-            alt="Tiny Beacons family"
-            width={720}
-            height={720}
-            unoptimized
-            draggable={false}
+          <Logo />
+
+          <h1
             style={{
-              width: "100%",
-              height: "auto",
-              borderRadius: "var(--radius-lg)",
-              objectFit: "contain",
+              fontFamily: "var(--serif)",
+              fontSize: "1.65rem",
+              lineHeight: 1.3,
+              color: "var(--color-text)",
+              marginTop: 16,
+              marginBottom: 10,
             }}
-          />
+          >
+            A gentle place for faith at home.
+          </h1>
+          <h2
+            style={{
+              fontFamily: "var(--serif)",
+              fontSize: "1rem",
+              fontWeight: 400,
+              lineHeight: 1.55,
+              color: "var(--color-text-muted)",
+              maxWidth: 340,
+              marginBottom: 28,
+            }}
+          >
+            Tiny Beacons helps parents create small, meaningful moments of faith
+            with their kids &mdash; without pressure, perfection, or keeping up.
+          </h2>
+
+          <div className="button-row" style={{ marginBottom: 0 }}>
+            <Button variant="primary" onClick={() => router.push("/pricing")}>
+              Become a member
+            </Button>
+            <Button
+              variant="link"
+              onClick={() => {
+                /* placeholder for real auth */
+              }}
+            >
+              Already a member? Log in
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="button-row">
-        <Button variant="primary" onClick={() => router.push("/pricing")}>
-          Become a member
-        </Button>
-        <Button
-          variant="link"
-          onClick={() => {
-            /* placeholder for real auth */
-          }}
-        >
-          Already a member? Log in
-        </Button>
-      </div>
-
-      <div className="content-card" style={{ marginTop: "36px" }}>
-        <h3>
-          <span className="section-icon"><LanternIcon /></span>
-          A moment when you&rsquo;re ready
-        </h3>
-        <p style={{ marginBottom: "12px" }}>
-          This space holds gentle stories, simple prompts, and quiet prayer
-          cards &mdash; always here, never rushed.
-        </p>
-        <p className="helper-text" style={{ marginTop: "0" }}>
-          Nothing expires. Nothing stacks up.
-        </p>
-        <div style={{ marginTop: "20px" }}>
-          <Button variant="secondary" onClick={() => router.push("/moment")}>
-            See how this works
-          </Button>
+      {/* ── Below the fold ── */}
+      <div
+        style={{
+          maxWidth: "var(--max-width)",
+          margin: "0 auto",
+          padding: "32px 20px 40px",
+        }}
+      >
+        <div className="content-card" style={{ marginTop: 0 }}>
+          <h3>
+            <span className="section-icon"><LanternIcon /></span>
+            A moment when you&rsquo;re ready
+          </h3>
+          <p style={{ marginBottom: "12px" }}>
+            This space holds gentle stories, simple prompts, and quiet prayer
+            cards &mdash; always here, never rushed.
+          </p>
+          <p className="helper-text" style={{ marginTop: "0" }}>
+            Nothing expires. Nothing stacks up.
+          </p>
+          <div style={{ marginTop: "20px" }}>
+            <Button variant="secondary" onClick={() => router.push("/moment")}>
+              See how this works
+            </Button>
+          </div>
         </div>
-      </div>
 
-      <p className="footer-note">
-        There&rsquo;s nothing to catch up on. Start whenever you&rsquo;re
-        ready.
-      </p>
+        <p className="footer-note">
+          There&rsquo;s nothing to catch up on. Start whenever you&rsquo;re
+          ready.
+        </p>
+      </div>
 
       {showPaywall && (
         <Modal
