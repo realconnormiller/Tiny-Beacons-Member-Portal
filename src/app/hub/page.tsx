@@ -7,6 +7,7 @@ import { useUser } from "@/context/UserContext";
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 import CharacterImage from "@/components/CharacterImage";
+import AppHeader from "@/components/AppHeader";
 
 const EMOTION_VERSES: Record<string, { verse: string; reference: string }> = {
   Anxious: {
@@ -71,6 +72,7 @@ export default function HomePage() {
 
   return (
     <div className="page" data-scene="afternoon">
+      <AppHeader />
       <div className="page-blob page-blob--top-right" />
       <div className="page-blob page-blob--bottom-left" />
 

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
+import AppHeader from "@/components/AppHeader";
 
 function LanternIcon() {
   return (
@@ -22,6 +23,7 @@ export default function RootPage() {
 
   return (
     <div className="page" style={{ padding: 0 }}>
+      <AppHeader />
       <div className="page-blob page-blob--top-right" />
       <div className="page-blob page-blob--bottom-left" />
 

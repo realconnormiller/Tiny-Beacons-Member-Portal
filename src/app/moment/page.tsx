@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
 import CharacterImage from "@/components/CharacterImage";
+import AppHeader from "@/components/AppHeader";
 
 const momentTitle = "Tonight\u2019s Tiny Moment";
 const storyTitle = "A Tiny Moment";
@@ -55,6 +56,7 @@ export default function MomentPage() {
 
   return (
     <div className="page" data-scene="twilight">
+      <AppHeader />
       <div
         style={{
           width: "100%",
