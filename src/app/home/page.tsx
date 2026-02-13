@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useUser } from "@/context/UserContext";
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
-import Modal from "@/components/Modal";
 import CharacterImage from "@/components/CharacterImage";
 
 const EMOTION_VERSES: Record<string, { verse: string; reference: string }> = {
@@ -37,15 +36,6 @@ const EMOTION_VERSES: Record<string, { verse: string; reference: string }> = {
 };
 
 /* Small inline SVG icons (decorative only, non-interactive) */
-function LanternIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M8 1v2M8 13v2M3.5 5.5a4.5 4.5 0 019 0c0 2.5-2 4-2 6H5.5c0-2-2-3.5-2-6z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M5.5 11.5h5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-    </svg>
-  );
-}
-
 function HeartIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -62,189 +52,22 @@ function StarIcon() {
   );
 }
 
-function PublicHome() {
-  const router = useRouter();
-  const [showPaywall, setShowPaywall] = useState(false);
-
+function BookIcon() {
   return (
-    <div className="page" style={{ padding: 0 }}>
-      <div className="page-blob page-blob--top-right" />
-      <div className="page-blob page-blob--bottom-left" />
-
-      {/* ── Full-bleed poster hero ── */}
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          minHeight: "92vh",
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          background: "linear-gradient(180deg, var(--color-bg) 0%, var(--color-warm) 40%, var(--color-warm-deep) 100%)",
-        }}
-      >
-        {/* Family poster image — anchored to bottom */}
-        <Image
-          src="/characters/family-hero.png"
-          alt="Tiny Beacons family"
-          fill
-          unoptimized
-          draggable={false}
-          style={{
-            objectFit: "contain",
-            objectPosition: "bottom center",
-            pointerEvents: "none",
-          }}
-        />
-
-        {/* Warm glow overlay behind text */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "radial-gradient(ellipse 70% 50% at 50% 28%, rgba(253,246,239,0.92) 0%, rgba(253,246,239,0.6) 40%, transparent 72%)",
-            pointerEvents: "none",
-            userSelect: "none",
-          }}
-        />
-
-        {/* Edge vignette */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 55%, rgba(250,248,245,0.45) 100%)",
-            pointerEvents: "none",
-            userSelect: "none",
-          }}
-        />
-
-        {/* Hero content — upper portion */}
-        <div
-          style={{
-            position: "relative",
-            zIndex: 2,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            maxWidth: "var(--max-width)",
-            padding: "48px 24px 0",
-            width: "100%",
-          }}
-        >
-          <Logo />
-
-          <h1
-            style={{
-              fontFamily: "var(--serif)",
-              fontSize: "1.65rem",
-              lineHeight: 1.3,
-              color: "var(--color-text)",
-              marginTop: 16,
-              marginBottom: 10,
-            }}
-          >
-            A gentle place for faith at home.
-          </h1>
-          <h2
-            style={{
-              fontFamily: "var(--serif)",
-              fontSize: "1rem",
-              fontWeight: 400,
-              lineHeight: 1.55,
-              color: "var(--color-text-muted)",
-              maxWidth: 340,
-              marginBottom: 28,
-            }}
-          >
-            Tiny Beacons helps parents create small, meaningful moments of faith
-            with their kids &mdash; without pressure, perfection, or keeping up.
-          </h2>
-
-          <div className="button-row" style={{ marginBottom: 0 }}>
-            <Button variant="primary" onClick={() => router.push("/pricing")}>
-              Become a member
-            </Button>
-            <Button
-              variant="link"
-              onClick={() => {
-                /* placeholder for real auth */
-              }}
-            >
-              Already a member? Log in
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Below the fold ── */}
-      <div
-        style={{
-          maxWidth: "var(--max-width)",
-          margin: "0 auto",
-          padding: "32px 20px 40px",
-        }}
-      >
-        <div className="content-card" style={{ marginTop: 0 }}>
-          <h3>
-            <span className="section-icon"><LanternIcon /></span>
-            A moment when you&rsquo;re ready
-          </h3>
-          <p style={{ marginBottom: "12px" }}>
-            This space holds gentle stories, simple prompts, and quiet prayer
-            cards &mdash; always here, never rushed.
-          </p>
-          <p className="helper-text" style={{ marginTop: "0" }}>
-            Nothing expires. Nothing stacks up.
-          </p>
-          <div style={{ marginTop: "20px" }}>
-            <Button variant="secondary" onClick={() => router.push("/moment")}>
-              See how this works
-            </Button>
-          </div>
-        </div>
-
-        <p className="footer-note">
-          There&rsquo;s nothing to catch up on. Start whenever you&rsquo;re
-          ready.
-        </p>
-      </div>
-
-      {showPaywall && (
-        <Modal
-          title="This space is for Tiny Beacons families."
-          body="This part of Tiny Beacons is reserved for members &mdash; parents who want a calm, trusted place to return to when sharing faith at home feels hard."
-          primaryLabel="Become a member"
-          secondaryLabel="Go back"
-          onPrimary={() => router.push("/pricing")}
-          onSecondary={() => setShowPaywall(false)}
-        />
-      )}
-    </div>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M2 2h5l1 1 1-1h5v11H9l-1 1-1-1H2V2z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M8 3v11" stroke="currentColor" strokeWidth="1.2"/>
+    </svg>
   );
 }
 
-/* Deterministic dog: pick copper vs zero based on pathname char-sum */
-function getDogSrc(pathname: string) {
-  let sum = 0;
-  for (let i = 0; i < pathname.length; i++) sum += pathname.charCodeAt(i);
-  return sum % 2 === 0 ? "/characters/copper.png" : "/characters/zero.png";
-}
-
-function MemberHome() {
+export default function HomePage() {
+  const { user } = useUser();
   const router = useRouter();
   const [selectedEmotion, setSelectedEmotion] = useState<string | null>(null);
 
   const emotions = Object.keys(EMOTION_VERSES);
-  const activeVerse = selectedEmotion
-    ? EMOTION_VERSES[selectedEmotion]
-    : null;
-
-  const dogSrc = getDogSrc("/home");
+  const activeVerse = selectedEmotion ? EMOTION_VERSES[selectedEmotion] : null;
 
   return (
     <div className="page" data-scene="afternoon">
@@ -252,27 +75,101 @@ function MemberHome() {
       <div className="page-blob page-blob--bottom-left" />
 
       <Logo />
-      <h1>Welcome back. Keep it simple.</h1>
 
-      {/* Primary card — Anchor story */}
-      <div className="warm-card has-sticker" style={{ marginTop: "24px", position: "relative" }}>
-        <div className="watermark watermark--sparkle" aria-hidden="true" style={{ bottom: 10, left: 12 }} />
-        <h3>A moment when you&rsquo;re ready</h3>
-        <div className="card-subtitle">The Good Shepherd</div>
-        <Button variant="primary" onClick={() => router.push("/start-here")}>
-          Start here
+      <h1
+        style={{
+          fontFamily: "var(--serif)",
+          fontSize: "1.5rem",
+          lineHeight: 1.3,
+          color: "var(--color-text)",
+          fontWeight: 600,
+          textAlign: "center",
+          marginBottom: 6,
+        }}
+      >
+        {user.isLoggedIn ? "Welcome back." : "Your family\u2019s quiet place."}
+      </h1>
+      <p
+        style={{
+          fontFamily: "var(--serif)",
+          fontSize: "0.95rem",
+          color: "var(--color-text-muted)",
+          textAlign: "center",
+          marginBottom: 28,
+          maxWidth: 320,
+        }}
+      >
+        Keep it simple. Start when you&rsquo;re ready.
+      </p>
+
+      {/* Hero card — Tonight's Tiny Moment */}
+      <div
+        className="warm-card has-sticker"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          textAlign: "center",
+          padding: "28px 24px 24px",
+        }}
+      >
+        {/* Subtle family image */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            bottom: -8,
+            right: -8,
+            width: 140,
+            height: 140,
+            opacity: 0.12,
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+        >
+          <Image
+            src="/characters/family-hero.png"
+            alt=""
+            width={280}
+            height={280}
+            unoptimized
+            draggable={false}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              objectPosition: "bottom right",
+            }}
+          />
+        </div>
+
+        <h3
+          style={{
+            fontFamily: "var(--serif)",
+            fontSize: "1.15rem",
+            color: "var(--color-text)",
+            fontWeight: 500,
+            marginBottom: 6,
+          }}
+        >
+          Tonight&rsquo;s Tiny Moment
+        </h3>
+        <p
+          style={{
+            fontFamily: "var(--serif)",
+            fontSize: "0.92rem",
+            color: "var(--color-text-muted)",
+            marginBottom: 20,
+          }}
+        >
+          A story, a question, and a prayer. Five minutes is plenty.
+        </p>
+        <Button variant="primary" onClick={() => router.push("/moment")}>
+          Start tonight&rsquo;s moment &rarr;
         </Button>
-        <p>Five minutes is plenty.</p>
-      </div>
-
-      {/* Companion card — quiet secondary */}
-      <div className="quiet-card">
-        <h4>Another moment waiting for you</h4>
-        <p>A Bedtime Blessing &mdash; a gentle companion piece.</p>
       </div>
 
       {/* Prayer Cards section */}
-      <div className="content-card">
+      <div className="content-card" style={{ marginTop: 20 }}>
         <h3>
           <span className="section-icon"><HeartIcon /></span>
           Prayer Cards
@@ -335,22 +232,15 @@ function MemberHome() {
 
       {/* Secondary links — text-only, visually quiet */}
       <div className="secondary-links">
+        <button className="secondary-link">
+          <span className="section-icon"><BookIcon /></span>
+          Explore the library
+        </button>
         <button className="secondary-link">Printables</button>
-        <button className="secondary-link">Past moments</button>
         <button className="secondary-link">Settings</button>
       </div>
 
       <p className="footer-note">No catching up required.</p>
     </div>
   );
-}
-
-export default function HomePage() {
-  const { user } = useUser();
-
-  if (user.isLoggedIn) {
-    return <MemberHome />;
-  }
-
-  return <PublicHome />;
 }
