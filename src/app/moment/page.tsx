@@ -438,7 +438,7 @@ function StepComplete({
           </p>
         ))}
       </div>
-      <Button onClick={() => router.push("/home")}>Go home</Button>
+      <Button onClick={() => router.push("/hub")}>Go home</Button>
     </>
   );
 }
