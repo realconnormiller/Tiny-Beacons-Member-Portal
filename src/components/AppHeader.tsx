@@ -19,18 +19,7 @@ export default function AppHeader() {
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(mq.matches);
-    function onChange(e: MediaQueryListEvent) {
-      setReduceMotion(e.matches);
-    }
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -56,6 +45,18 @@ export default function AppHeader() {
     return () => window.removeEventListener("mousedown", onClick);
   }, [open, close]);
 
+  /* Lock body scroll when drawer is open */
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   function handleBack() {
     if (window.history.length > 1) {
       router.back();
@@ -64,137 +65,63 @@ export default function AppHeader() {
     }
   }
 
-  const transition = reduceMotion ? "none" : "transform 220ms ease, opacity 220ms ease";
-
   return (
     <>
-      <header
-        style={{
-          position: "relative",
-          zIndex: 50,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          width: "100%",
-          maxWidth: "var(--max-width)",
-          margin: "0 auto",
-          padding: "12px 4px 0",
-        }}
-      >
+      <header className="app-header">
         {/* Back */}
-        <button
-          onClick={handleBack}
-          style={{
-            background: "none",
-            border: "none",
-            fontFamily: "var(--sans)",
-            fontSize: "0.84rem",
-            color: "var(--color-text-muted)",
-            cursor: "pointer",
-            padding: "8px 10px",
-            borderRadius: "var(--radius-sm)",
-            WebkitTapHighlightColor: "transparent",
-          }}
-        >
-          &larr; Back
+        <button className="app-header-btn" onClick={handleBack}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Back
         </button>
+
+        {/* Centered brand */}
+        <div className="app-header-brand" aria-hidden="true">
+          <div className="app-header-brand-dot" />
+          <span className="app-header-brand-label">Tiny Beacons</span>
+        </div>
 
         {/* Hamburger */}
         <button
+          className="app-header-btn"
           onClick={() => setOpen(!open)}
           aria-label={open ? "Close menu" : "Open menu"}
-          style={{
-            background: "none",
-            border: "none",
-            fontSize: "1.35rem",
-            lineHeight: 1,
-            color: "var(--color-text-muted)",
-            cursor: "pointer",
-            padding: "8px 10px",
-            borderRadius: "var(--radius-sm)",
-            WebkitTapHighlightColor: "transparent",
-          }}
         >
-          &#9776;
+          <span className="app-header-hamburger" aria-hidden="true">&#9776;</span>
         </button>
       </header>
 
-      {/* Overlay */}
-      {open && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 90,
-            background: "rgba(26,22,20,0.25)",
-            transition: reduceMotion ? "none" : "opacity 180ms ease",
-          }}
-        />
-      )}
+      {/* Scrim overlay */}
+      <div
+        className={`drawer-scrim${open ? " open" : ""}`}
+        aria-hidden="true"
+      />
 
       {/* Drawer */}
       <div
         ref={drawerRef}
-        style={{
-          position: "fixed",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 100,
-          width: 260,
-          maxWidth: "80vw",
-          background: "var(--color-surface)",
-          boxShadow: open ? "-4px 0 24px rgba(30,26,23,0.10)" : "none",
-          transform: open ? "translateX(0)" : "translateX(100%)",
-          opacity: open ? 1 : 0,
-          transition,
-          display: "flex",
-          flexDirection: "column",
-          padding: "24px 20px",
-          overflowY: "auto",
-        }}
+        className={`drawer-panel${open ? " open" : ""}`}
       >
         {/* Close button */}
         <button
           onClick={close}
           aria-label="Close menu"
-          style={{
-            alignSelf: "flex-end",
-            background: "none",
-            border: "none",
-            fontSize: "1.3rem",
-            color: "var(--color-text-muted)",
-            cursor: "pointer",
-            padding: "4px 8px",
-            marginBottom: 16,
-            WebkitTapHighlightColor: "transparent",
-          }}
+          className="drawer-close-btn"
         >
           &times;
         </button>
 
-        <nav style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        <nav className="drawer-nav">
           {NAV_LINKS.map(({ href, label }) => {
             const active = pathname === href;
             return (
               <button
                 key={href}
+                className={`drawer-link${active ? " active" : ""}`}
                 onClick={() => {
                   close();
                   router.push(href);
-                }}
-                style={{
-                  background: active ? "var(--color-warm)" : "transparent",
-                  border: "none",
-                  fontFamily: "var(--sans)",
-                  fontSize: "0.92rem",
-                  fontWeight: active ? 500 : 400,
-                  color: active ? "var(--color-text)" : "var(--color-text-muted)",
-                  textAlign: "left",
-                  padding: "10px 14px",
-                  borderRadius: "var(--radius-sm)",
-                  cursor: "pointer",
-                  WebkitTapHighlightColor: "transparent",
                 }}
               >
                 {label}
