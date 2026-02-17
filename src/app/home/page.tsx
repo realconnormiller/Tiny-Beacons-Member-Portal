@@ -133,9 +133,7 @@ export default function RootPage() {
             </Button>
             <Button
               variant="link"
-              onClick={() => {
-                /* placeholder for real auth */
-              }}
+              onClick={() => router.push("/login")}
             >
               Already a member? Log in
             </Button>
