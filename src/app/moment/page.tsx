@@ -6,6 +6,13 @@ import Button from "@/components/Button";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
 import CharacterImage from "@/components/CharacterImage";
 import AppHeader from "@/components/AppHeader";
+import {
+  getTodayHistory,
+  recordWatched,
+  recordAsked,
+  recordPrayed,
+  type TodayHistory,
+} from "@/app/actions/moment-history";
 
 const momentTitle = "Tonight\u2019s Tiny Moment";
 const storyTitle = "A Tiny Moment";
@@ -25,6 +32,7 @@ export default function MomentPage() {
   const [isFading, setIsFading] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [showWhisper, setShowWhisper] = useState(false);
+  const [history, setHistory] = useState<TodayHistory | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -36,7 +44,16 @@ export default function MomentPage() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  useEffect(() => {
+    getTodayHistory().then(setHistory).catch(() => {});
+  }, []);
+
   function goTo(nextStep: 0 | 1 | 2 | 3 | 4) {
+    // Record completion when advancing past each step (fire-and-forget)
+    if (step === 1 && nextStep === 2) recordWatched().catch(() => {});
+    if (step === 2 && nextStep === 3) recordAsked().catch(() => {});
+    if (step === 3 && nextStep === 4) recordPrayed().catch(() => {});
+
     if (nextStep !== 2) setShowWhisper(false);
     if (reduceMotion) {
       setStep(nextStep);
@@ -53,6 +70,12 @@ export default function MomentPage() {
     transition: reduceMotion ? "none" : "opacity 250ms ease",
     opacity: isFading ? 0 : 1,
   };
+
+  // Optimistic completion: true once the user passes the step in this session,
+  // or if the server already recorded it today.
+  const watched = step > 1 || !!history?.watched_at;
+  const asked = step > 2 || !!history?.asked_at;
+  const prayed = step > 3 || !!history?.prayed_at;
 
   return (
     <div className="page" data-scene="twilight">
@@ -73,6 +96,11 @@ export default function MomentPage() {
         }}
       >
         <div style={panelStyle}>
+          {/* Tiny 3 progress — visible during active flow steps */}
+          {step > 0 && step < 4 && (
+            <TinyThree watched={watched} asked={asked} prayed={prayed} />
+          )}
+
           {step === 0 && <StepArrival goTo={goTo} />}
           {step === 1 && <StepWatch goTo={goTo} />}
           {step === 2 && (
@@ -159,6 +187,85 @@ export default function MomentPage() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Tiny 3 progress indicator                                          */
+/* ------------------------------------------------------------------ */
+
+function TinyThree({
+  watched,
+  asked,
+  prayed,
+}: {
+  watched: boolean;
+  asked: boolean;
+  prayed: boolean;
+}) {
+  const steps = [
+    { label: "Watch", done: watched },
+    { label: "Ask", done: asked },
+    { label: "Pray", done: prayed },
+  ];
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: 24,
+        justifyContent: "center",
+        marginBottom: 28,
+      }}
+    >
+      {steps.map(({ label, done }) => (
+        <div
+          key={label}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 4,
+          }}
+        >
+          <div
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: "50%",
+              border: "1.5px solid",
+              borderColor: done
+                ? "var(--color-primary)"
+                : "var(--color-text-muted)",
+              backgroundColor: done ? "var(--color-primary)" : "transparent",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: done ? "#fff" : "var(--color-text-muted)",
+              fontSize: "0.78rem",
+              fontWeight: 700,
+              transition: "all 250ms ease",
+              opacity: done ? 1 : 0.4,
+            }}
+          >
+            {done ? "\u2713" : ""}
+          </div>
+          <span
+            style={{
+              fontFamily: "var(--sans)",
+              fontSize: "0.7rem",
+              color: done ? "var(--color-primary)" : "var(--color-text-muted)",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase" as const,
+              opacity: done ? 1 : 0.5,
+              transition: "all 250ms ease",
+            }}
+          >
+            {label}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Step components                                                    */
 /* ------------------------------------------------------------------ */
 
@@ -206,11 +313,37 @@ function StepArrival({ goTo }: { goTo: (s: 0 | 1 | 2 | 3 | 4) => void }) {
           fontSize: "1.05rem",
           color: "var(--color-text-muted)",
           lineHeight: 1.5,
-          marginBottom: 36,
+          marginBottom: 16,
           maxWidth: 320,
         }}
       >
         You don&rsquo;t have to carry today in here.
+      </p>
+      <p
+        style={{
+          fontFamily: "var(--sans)",
+          fontSize: "0.84rem",
+          color: "var(--color-text-muted)",
+          lineHeight: 1.5,
+          marginBottom: 4,
+          maxWidth: 320,
+          opacity: 0.75,
+        }}
+      >
+        Missed yesterday? That&rsquo;s okay. Start tonight.
+      </p>
+      <p
+        style={{
+          fontFamily: "var(--sans)",
+          fontSize: "0.84rem",
+          color: "var(--color-text-muted)",
+          lineHeight: 1.5,
+          marginBottom: 32,
+          maxWidth: 320,
+          opacity: 0.75,
+        }}
+      >
+        Tonight, families are slowing down together.
       </p>
       <Button onClick={() => goTo(1)}>We&rsquo;re ready &rarr;</Button>
     </>
@@ -417,7 +550,7 @@ function StepComplete({
           display: "flex",
           flexDirection: "column",
           gap: 6,
-          marginBottom: 36,
+          marginBottom: 24,
           maxWidth: 300,
         }}
       >
@@ -440,6 +573,35 @@ function StepComplete({
           </p>
         ))}
       </div>
+
+      {/* All three steps done — show completed Tiny 3 */}
+      <TinyThree watched asked prayed />
+
+      <div style={{ marginBottom: 32, maxWidth: 300 }}>
+        <p
+          style={{
+            fontFamily: "var(--serif)",
+            fontSize: "1rem",
+            color: "var(--color-text)",
+            fontWeight: 500,
+            lineHeight: 1.5,
+            marginBottom: 4,
+          }}
+        >
+          You&rsquo;re a Tiny Beacons family.
+        </p>
+        <p
+          style={{
+            fontFamily: "var(--serif)",
+            fontSize: "0.95rem",
+            color: "var(--color-text-muted)",
+            lineHeight: 1.5,
+          }}
+        >
+          And this is what Tiny Beacons families do.
+        </p>
+      </div>
+
       <Button onClick={() => router.push("/home")}>Go home</Button>
     </>
   );

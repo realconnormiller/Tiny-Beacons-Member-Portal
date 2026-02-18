@@ -6,9 +6,18 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
+  // If env vars are missing we cannot talk to Supabase at all.
+  // Return early so the rest of middleware can treat the request as unauthenticated.
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    return { user: null, supabaseResponse };
+  }
+
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
         getAll() {
@@ -29,9 +38,14 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const { data } = await supabase.auth.getUser();
+    user = data.user;
+  } catch {
+    // Network error or unexpected Supabase failure.
+    // Treat as unauthenticated — middleware will redirect protected routes to /login.
+  }
 
   return { user, supabaseResponse };
 }

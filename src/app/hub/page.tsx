@@ -160,10 +160,22 @@ export default function HomePage() {
             fontFamily: "var(--serif)",
             fontSize: "0.92rem",
             color: "var(--color-text-muted)",
-            marginBottom: 20,
+            marginBottom: 12,
           }}
         >
           A story, a question, and a prayer. Five minutes is plenty.
+        </p>
+        <p
+          style={{
+            fontFamily: "var(--serif)",
+            fontSize: "0.88rem",
+            color: "var(--color-text-muted)",
+            fontStyle: "italic",
+            marginBottom: 20,
+            opacity: 0.8,
+          }}
+        >
+          In this house, we slow down together.
         </p>
         <Button variant="primary" onClick={() => router.push("/moment")}>
           Start tonight&rsquo;s moment &rarr;

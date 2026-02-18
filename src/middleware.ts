@@ -19,27 +19,44 @@ function isProtected(pathname: string): boolean {
 }
 
 export async function middleware(request: NextRequest) {
-  const { user, supabaseResponse } = await updateSession(request);
+  try {
+    const { pathname } = request.nextUrl;
 
-  const { pathname } = request.nextUrl;
+    // Let the auth callback route handler run without any session interference.
+    // updateSession calls getUser() which can corrupt the PKCE code-verifier cookie
+    // before exchangeCodeForSession() in the route handler has a chance to use it.
+    if (pathname.startsWith("/auth/callback")) {
+      return NextResponse.next();
+    }
 
-  // If user is not authenticated and trying to access a protected route,
-  // redirect to /login with a "next" param to preserve intended destination
-  if (!user && isProtected(pathname)) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("next", pathname);
-    return NextResponse.redirect(url);
+    const { user, supabaseResponse } = await updateSession(request);
+
+    // If user is not authenticated and trying to access a protected route,
+    // redirect to /login with a "next" param to preserve intended destination
+    if (!user && isProtected(pathname)) {
+      const url = request.nextUrl.clone();
+      const search = request.nextUrl.search;
+      const nextPath = search ? `${pathname}${search}` : pathname;
+      url.pathname = "/login";
+      url.search = "";
+      url.searchParams.set("next", nextPath);
+      return NextResponse.redirect(url);
+    }
+
+    // If user is authenticated and visits /login, redirect to /hub
+    if (user && pathname === "/login") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/hub";
+      return NextResponse.redirect(url);
+    }
+
+    return supabaseResponse;
+  } catch {
+    // Fail open: never let middleware crash the entire request.
+    // Protected-route enforcement is a best-effort safety net;
+    // server components and route handlers have their own auth guards.
+    return NextResponse.next();
   }
-
-  // If user is authenticated and visits /login, redirect to /hub
-  if (user && pathname === "/login") {
-    const url = request.nextUrl.clone();
-    url.pathname = "/hub";
-    return NextResponse.redirect(url);
-  }
-
-  return supabaseResponse;
 }
 
 export const config = {
